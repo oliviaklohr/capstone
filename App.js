@@ -1,24 +1,17 @@
+/**
+ * NOTE: Anything that you place within the confinds of the `render` method
+ * below will end up becoming part of our App's UI. This component should be
+ * treated SOLELY as a place from which to mount sub-components containing
+ * actual content.
+ */
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 
-export default class App extends React.Component {
+import ExampleComponent from './src/components/example-component/ExampleComponent';
+
+class App extends React.Component {
   render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-        <Text>Hello, World!</Text>
-      </View>
-    );
+    return (<ExampleComponent />);
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
