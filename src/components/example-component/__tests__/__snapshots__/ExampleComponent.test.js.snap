@@ -48,6 +48,20 @@ exports[`renders without crashing 1`] = `
     >
       Hello, World!
     </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      My name is Olivia!
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      KILL US
+    </Text>
   </View>
 </View>
 `;
