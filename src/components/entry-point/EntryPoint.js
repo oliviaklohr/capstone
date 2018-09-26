@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { Text, SafeAreaView } from 'react-native';
 import { ThemeContext, getTheme } from 'react-native-material-ui';
 import Menubar from '../menubar/Menubar';
+import Penu from '../penu/Penu';
 
 import uiTheme from '../_theme';
 
@@ -55,6 +56,7 @@ class EntryPoint extends React.Component {
             { rightNotificationDisplayed &&
               <Text>THE RIGHT ELEMENT HAS BEEN CLICKED!</Text>
             }
+            <Penu />
           </SafeAreaView>
         </Fragment>
       </ThemeContext.Provider>
