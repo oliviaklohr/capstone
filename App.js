@@ -1,16 +1,25 @@
-/**
- * NOTE: Anything that you place within the confinds of the `render` method
- * below will end up becoming part of our App's UI. This component should be
- * treated SOLELY as a place from which to mount sub-components containing
- * actual content.
- */
-import React from 'react';
 
-import ExampleComponent from './src/components/example-component/ExampleComponent';
+import React from 'react';
+import { Font, AppLoading } from 'expo';
+import EntryPoint from './src/components/entry-point/EntryPoint';
+
 
 class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      fontsAreLoaded: false,
+    };
+  }
+
+  async componentWillMount() {
+    await Font.loadAsync({ 'Material Icons': require('@expo/vector-icons/fonts/MaterialIcons.ttf') });
+    this.setState({ fontsAreLoaded: true });
+  }
+
   render() {
-    return (<ExampleComponent />);
+    const { fontsAreLoaded } = this.state;
+    return fontsAreLoaded ? <EntryPoint /> : <AppLoading />;
   }
 }
 
