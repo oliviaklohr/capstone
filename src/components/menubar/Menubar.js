@@ -14,6 +14,7 @@ const propTypes = {
   /**
    * Callback function triggered when the right toolbar item is clicked
    */
+  // Need to handle each of these elements differently....
   onRightElementPress: PropTypes.func,
 };
 
@@ -28,29 +29,40 @@ const Menubar = ({
 }) => {
   const { container } = styles;
   const rightElement = {
-    actions: ['more-vert']
+    // Does 'file-upload' work as an export logo? Or is it confusing.
+    actions: ['settings', 'file-upload', 'group']
   };
 
+  // Probably should figure out how to abstract these elements
+  // Since the menubar will have one look in the drawing canvas and another
+  // on the main notebook generation page...
+  // Or will I just make a different component for that too?
   return (
     <View style={container}>
       <Toolbar
         /* ICONS NEEDED:
          * Left:
-         * -
-         * Center (If Possible):
-         * (If not possible, put on right side.)
+         * - Notebooks
+         *   - Should trigger a
+         * Center
          * - Pen
          * - Highlighter
          * - Eraser
          * - Cut
          * Right:
          * - Page Settings
+         *   - Should trigger dropdown for app settings, penu settings, page settings
+         * - Export
+         * - Swipe out should trigger collab - should there be a button for it too?
+         *   - Included for posterity's sake. Easier to undo than remember to do
          */
         onLeftElementPress={onLeftElementPress}
         onRightElementPress={onRightElementPress}
-        leftElement="menu"
+        // I don't think I like this as the notebooks trigger but it'll work for now
+        leftElement="book"
         // I had this including style={CommandPalette} so that I could guarantee it was centered
         // but I'm not sure if it's necessary.
+        // It doesn't automatically center correctly though >:[
         centerElement={<CommandPalette />}
         rightElement={rightElement}
       />
