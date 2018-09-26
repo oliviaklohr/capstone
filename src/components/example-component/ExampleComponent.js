@@ -12,6 +12,8 @@ const ExampleComponent = () => {
       <Text>Shake your phone to open the developer menu.</Text>
       <View style={helloWorld}>
         <Text>Hello, World!</Text>
+        <Text>My name is Olivia!</Text>
+        <Text>KILL US</Text>
       </View>
     </View>
   );

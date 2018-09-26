@@ -10,7 +10,7 @@ const ExampleContentStyles = StyleSheet.create({
   },
   helloWorld: {
     margin: 30,
-    backgroundColor: 'red'
+    backgroundColor: 'red',
   }
 });
 
