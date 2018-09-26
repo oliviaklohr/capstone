@@ -31,8 +31,14 @@ const Menubar = ({
       <Toolbar
         onLeftElementPress={onLeftElementPress}
         onRightElementPress={onRightElementPress}
-        leftElement="menu"
-        rightElement="brush"
+        leftElement={{
+          menu: {
+            icon: "more-vert",
+            labels: ["x", "y"],
+          }
+        }}
+        centerElement="brush"
+        rightElement="settings"
       />
     </View>
   );
