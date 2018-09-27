@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text } from 'react-native';
-import { Toolbar, COLOR } from 'react-native-material-ui';
-import CommandPalette from '/Users/olivialedford/Documents/School Work/2018/Fall/4980/capstone/src/components/command-palette.js/CommandPalette.js';
+import CommandPalette from '../command-palette/CommandPalette.js';
+import Toolbar from '../toolbar/Toolbar';
 
 import styles from './Menubar_Styles';
 
@@ -23,6 +23,11 @@ const defaultProps = {
   onRightElementPress: () => {},
 };
 
+// TODO: delete everything between the lines, once you've added real items to your menubar
+//=================
+const Box = ({ children }) => (<View style={styles.testBlock}><Text>{children}</Text></View>)
+//=================
+
 const Menubar = ({
   onLeftElementPress,
   onRightElementPress
@@ -40,31 +45,19 @@ const Menubar = ({
   return (
     <View style={container}>
       <Toolbar
-        /* ICONS NEEDED:
-         * Left:
-         * - Notebooks
-         *   - Should trigger a
-         * Center
-         * - Pen
-         * - Highlighter
-         * - Eraser
-         * - Cut
-         * Right:
-         * - Page Settings
-         *   - Should trigger dropdown for app settings, penu settings, page settings
-         * - Export
-         * - Swipe out should trigger collab - should there be a button for it too?
-         *   - Included for posterity's sake. Easier to undo than remember to do
-         */
-        onLeftElementPress={onLeftElementPress}
-        onRightElementPress={onRightElementPress}
-        // I don't think I like this as the notebooks trigger but it'll work for now
-        leftElement="book"
-        // I had this including style={CommandPalette} so that I could guarantee it was centered
-        // but I'm not sure if it's necessary.
-        // It doesn't automatically center correctly though >:[
-        centerElement={<CommandPalette />}
-        rightElement={rightElement}
+        leftSocketContent={
+          <Fragment>
+            <Box>1a</Box>
+          </Fragment>
+        }
+        centerSocketContent={<CommandPalette />}
+        rightSocketContent={
+        <Fragment>
+          <Box>3a</Box>
+          <Box>3b</Box>
+          <Box>3c</Box>
+        </Fragment>
+        }
       />
     </View>
   );

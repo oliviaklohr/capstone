@@ -9,7 +9,7 @@ const CommandPaletteStyles = StyleSheet.create({
   },
   button: {
     marginHorizontal: 8,
-    accent: 'white'
+    color: 'white'
   }
 });
 
