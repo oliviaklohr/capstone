@@ -1,7 +1,1 @@
-stories
-.storybook
-src
-scripts
-config
-
 **/node_modules/**
