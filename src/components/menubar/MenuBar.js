@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
-// import Toolbar from '../toolbar/Toolbar';
+import IconButton from '@material-ui/core/IconButton/IconButton';
+import ArrowBack from '@material-ui/icons/ArrowBack';
 
 import styles from './MenuBar.css';
 
@@ -24,42 +25,13 @@ const defaultProps = {
   onRightElementPress: () => {},
 };
 
-// TODO: delete everything between the lines, once you've added real items to your menubar
-//=================
-const Block = ({ children }) => (
-  <div className={cx('testBlock')}>
-    <p>{children}</p>
-  </div>
-)
-//=================
-
 const Menubar = ({
   onLeftElementPress,
   onRightElementPress
 }) => {
-  // Probably should figure out how to abstract these elements
-  // Since the menubar will have one look in the drawing canvas and another
-  // on the main notebook generation page...
-  // Or will I just make a different component for that too?
+
   return (
-    <header className={cx('container')}>
-      {/* <Toolbar
-        leftSocketContent={
-          <Fragment>
-            <Block>1a</Block>
-          </Fragment>
-        }
-        centerSocketContent={<CommandPalette />}
-        rightSocketContent={
-        <Fragment>
-          <Block>3a</Block>
-          <Block>3b</Block>
-          <Block>3c</Block>
-        </Fragment>
-        }
-      /> */}
-      Hello, world!
-    </header>
+    <IconButton><ArrowBack /></IconButton>
   );
 };
 
