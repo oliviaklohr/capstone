@@ -1,0 +1,19 @@
+.toolbar-socket {
+  align-items: center;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: row;
+}
+
+/* NOTE: only one of the following three styles may be applied at any given time */
+.justify-left {
+  justify-content: flex-start;
+}
+
+.justify-right {
+  justify-content: flex-end;
+}
+
+.justify-center {
+  justify-content: center;
+}

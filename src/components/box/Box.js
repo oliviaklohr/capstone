@@ -8,6 +8,8 @@ const cx = classNames.bind(styles);
 const propTypes = {
   /** some child content to be displayed within the box */
   children: PropTypes.node,
+  /** some foo prop */
+  foo: PropTypes.string.isRequired,
 };
 
 const defaultProps = {
