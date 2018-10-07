@@ -1,9 +1,20 @@
-import { configure } from '@storybook/react';
 
-// automatically import all files ending in *.stories.js
-const req = require.context('../stories', true, /.stories.js$/);
-function loadStories() {
-  req.keys().forEach(filename => req(filename));
+import { configure } from '@storybook/react';
+import { setDefaults } from '@storybook/addon-info';
+
+// addon-info
+setDefaults({
+  header: true, // Toggles display of header with component name and description
+  inline: true,
+  source: true,
+});
+
+function requireAll(requireContext) {
+  return requireContext.keys().map(requireContext);
 }
 
-configure(loadStories, module);
+function loadStories() {
+  requireAll(require.context("../", true, /-story\.js?$/));
+}
+
+configure(loadStories, module)

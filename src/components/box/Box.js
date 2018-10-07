@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from "classnames/bind";
-import styles from './Box.css';
+import styles from './Box.module.css';
 
 const cx = classNames.bind(styles);
 

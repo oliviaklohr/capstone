@@ -14,6 +14,7 @@ const paths = require('./paths');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const getCacheIdentifier = require('react-dev-utils/getCacheIdentifier');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
+const regexs = require('./fileExtensionRegexs');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -25,46 +26,8 @@ const publicUrl = '';
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
 
-// style files regexes
-const cssRegex = /\.css$/;
-const cssModuleRegex = /\.module\.css$/;
-const sassRegex = /\.(scss|sass)$/;
-const sassModuleRegex = /\.module\.(scss|sass)$/;
-
 // common function to get style loaders
-const getStyleLoaders = (cssOptions, preProcessor) => {
-  const loaders = [
-    require.resolve('style-loader'),
-    {
-      loader: require.resolve('css-loader'),
-      options: cssOptions,
-    },
-    {
-      // Options for PostCSS as we reference these options twice
-      // Adds vendor prefixing based on your specified browser support in
-      // package.json
-      loader: require.resolve('postcss-loader'),
-      options: {
-        // Necessary for external CSS imports to work
-        // https://github.com/facebook/create-react-app/issues/2677
-        ident: 'postcss',
-        plugins: () => [
-          require('postcss-flexbugs-fixes'),
-          require('postcss-preset-env')({
-            autoprefixer: {
-              flexbox: 'no-2009',
-            },
-            stage: 3,
-          }),
-        ],
-      },
-    },
-  ];
-  if (preProcessor) {
-    loaders.push(require.resolve(preProcessor));
-  }
-  return loaders;
-};
+const getStyleLoaders = require('./getStyleLoaders');
 
 // This is the development configuration.
 // It is focused on developer experience and fast rebuilds.
@@ -170,7 +133,7 @@ module.exports = {
       // First, run the linter.
       // It's important to do this before Babel processes the JS.
       {
-        test: /\.(js|jsx)$/,
+        test: regexs.jsRegex,
         enforce: 'pre',
         use: [
           {
@@ -213,7 +176,7 @@ module.exports = {
           // Process application JS with Babel.
           // The preset includes JSX, Flow, and some ESnext features.
           {
-            test: /\.(js|jsx)$/,
+            test: regexs.jsRegex,
             include: paths.appSrc,
             loader: require.resolve('babel-loader'),
             options: {
@@ -275,8 +238,8 @@ module.exports = {
           // in development "style" loader enables hot editing of CSS.
           // By default we support CSS Modules with the extension .module.css
           {
-            test: cssRegex,
-            exclude: cssModuleRegex,
+            test: regexs.cssRegex,
+            exclude: regexs.cssModuleRegex,
             use: getStyleLoaders({
               importLoaders: 1,
             }),
@@ -284,7 +247,7 @@ module.exports = {
           // Adds support for CSS Modules (https://github.com/css-modules/css-modules)
           // using the extension .module.css
           {
-            test: cssModuleRegex,
+            test: regexs.cssModuleRegex,
             use: getStyleLoaders({
               importLoaders: 1,
               modules: true,
@@ -297,14 +260,14 @@ module.exports = {
           // By default we support SASS Modules with the
           // extensions .module.scss or .module.sass
           {
-            test: sassRegex,
-            exclude: sassModuleRegex,
+            test: regexs.sassRegex,
+            exclude: regexs.sassModuleRegex,
             use: getStyleLoaders({ importLoaders: 2 }, 'sass-loader'),
           },
           // Adds support for CSS Modules, but using SASS
           // using the extension .module.scss or .module.sass
           {
-            test: sassModuleRegex,
+            test: regexs.sassModuleRegex,
             use: getStyleLoaders(
               {
                 importLoaders: 2,

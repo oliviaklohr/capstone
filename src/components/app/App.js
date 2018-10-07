@@ -21,7 +21,7 @@ class App extends Component {
             Learn React
           </a>
         </header>
-        <Box />
+        <Box foo="Olivia" />
       </div>
     );
   }
