@@ -6,7 +6,7 @@ import ToolbarSocket, { Justify as selectableOptions } from "./ToolbarSocket.js"
 
 storiesOf('ToolbarSocket', module)
   .add('choosable justification',  () => {
-    const label = 'Justification';
+    const label = 'props.justification';
     const defaultValue = selectableOptions.left;
 
     return(

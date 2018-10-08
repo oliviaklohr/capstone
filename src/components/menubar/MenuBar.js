@@ -1,41 +1,46 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
-import IconButton from '@material-ui/core/IconButton/IconButton';
-import ArrowBack from '@material-ui/icons/ArrowBack';
+import { generateMenuBarSocketMarkup } from './_menuBarHelpers';
+
+import Toolbar from '../toolbar/Toolbar';
 
 import styles from './MenuBar.module.css';
 
 const cx = classNames.bind(styles);
 
-const propTypes = {
-  /**
-   * Callback function triggered when the left toolbar item is clicked
-   */
-  onLeftElementPress: PropTypes.func,
-  /**
-   * Callback function triggered when the right toolbar item is clicked
-   */
-  // Need to handle each of these elements differently....
-  onRightElementPress: PropTypes.func,
-};
 
-const defaultProps = {
-  onLeftElementPress: () => {},
-  onRightElementPress: () => {},
-};
+const leftSocketData = [
+  {
+    iconName: 'Menu',
+    isDisabled: false,
+    onClick: () => window.alert('you have clicked the MENU item!'),
+  },
+];
+
+// TODO: follow this pattern to generate content for the center socket
+
+const rightSocketData = [
+  {
+    iconName: 'Settings',
+    isDisabled: false,
+    onClick: () => window.alert('you have clicked the SETTINGS item!'),
+  },
+  {
+    iconName: 'Group',
+    isDisabled: false,
+    onClick: () => window.alert('you have clicked the GROUP item!'),
+  }
+];
 
 const Menubar = ({
   onLeftElementPress,
   onRightElementPress
-}) => {
-
-  return (
-    <IconButton><ArrowBack /></IconButton>
-  );
-};
-
-Menubar.propTypes = propTypes;
-Menubar.defaultProps = defaultProps;
+}) => (
+  <Toolbar
+    leftSocketContent={generateMenuBarSocketMarkup(leftSocketData)}
+    rightSocketContent={generateMenuBarSocketMarkup(rightSocketData)}
+  />
+);
 
 export default Menubar;
