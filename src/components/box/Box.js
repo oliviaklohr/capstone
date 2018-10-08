@@ -10,16 +10,18 @@ const propTypes = {
   children: PropTypes.node,
   /** some foo prop */
   foo: PropTypes.string.isRequired,
+  showChildren: PropTypes.bool,
 };
 
 const defaultProps = {
   children: undefined,
+  showChildren: false,
 };
 
-const Box = ({ children }) => (
+const Box = ({ children, showChildren }) => (
   <div className={cx('box')}>
     Hello, World!
-    {children}
+    {showChildren && children}
   </div>
 );
 
