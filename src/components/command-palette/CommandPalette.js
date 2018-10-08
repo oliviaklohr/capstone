@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 
-import styles from './CommandPalette.css';
+import styles from './CommandPalette.module.css';
 
 const cx = classNames.bind(styles);
 

@@ -4,7 +4,7 @@ import Socket, { Justify } from './toolbar-socket/ToolbarSocket.js';
 
 import { toolbarSocketPropTypes } from './toolbar-socket/_toolbarSocketPropTypes.js';
 
-import styles from './Toolbar.css';
+import styles from './Toolbar.module.css';
 
 const cx = classNames.bind(styles);
 

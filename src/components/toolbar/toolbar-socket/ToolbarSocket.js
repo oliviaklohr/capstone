@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import { toolbarSocketPropTypes } from './_toolbarSocketPropTypes';
 
-import styles from './ToolbarSocket.css';
+import styles from './ToolbarSocket.module.css';
 
 const cx = classNames.bind(styles);
 
@@ -41,7 +41,6 @@ const ToolbarSocket = ({
       {children}
     </div>
   );
-
 };
 
 ToolbarSocket.propTypes = propTypes;

@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 import IconButton from '@material-ui/core/IconButton/IconButton';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 
-import styles from './MenuBar.css';
+import styles from './MenuBar.module.css';
 
 const cx = classNames.bind(styles);
 
