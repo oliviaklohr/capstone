@@ -1,33 +1,12 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import Box from '../box/Box.js';
+import React from 'react';
 import classNames from 'classnames/bind';
 import styles from './App.module.css';
+import MenuBar from '../menubar/MenuBar';
 
 const cx = classNames.bind(styles);
 
-class App extends Component {
-  render() {
-    return (
-      <div className={cx('App')}>
-        <header className={cx('App-header')}>
-          <img src={logo} className={cx('App-logo')} alt='logo' />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className={cx('App-link')}
-            href='https://reactjs.org'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            Learn React
-          </a>
-        </header>
-        <Box foo='Olivia' />
-      </div>
-    );
-  }
-}
+const App = () => (
+  <MenuBar />
+);
 
 export default App;
