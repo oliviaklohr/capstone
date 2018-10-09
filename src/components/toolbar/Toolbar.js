@@ -1,14 +1,19 @@
 import React from 'react';
-import { View } from 'react-native';
-import Socket, { Justify } from './ToolbarSocket/ToolbarSocket';
+import classNames from 'classnames/bind';
+import Socket, { Justify } from './toolbar-socket/ToolbarSocket.js';
 
-import { toolbarSocketPropTypes } from './ToolbarSocket/_toolbarSocketPropTypes';
+import { toolbarSocketPropTypes } from './toolbar-socket/_toolbarSocketPropTypes.js';
 
-import styles from './Toolbar_styles';
+import styles from './Toolbar.module.css';
+
+const cx = classNames.bind(styles);
 
 const propTypes = {
+  /** content to display in the left socket of the toolbar */
   leftSocketContent: toolbarSocketPropTypes,
+  /** content to display in the center socket of the toolbar */
   centerSocketContent: toolbarSocketPropTypes,
+  /** content to display in the right socket of the toolbar */
   rightSocketContent: toolbarSocketPropTypes,
 };
 
@@ -23,7 +28,7 @@ const Toolbar = ({
   centerSocketContent,
   rightSocketContent,
 }) => (
-  <View style={styles.toolbar}>
+  <div className={cx('toolbar')}>
     <Socket justification={Justify.left}>
       {leftSocketContent}
     </Socket>
@@ -33,7 +38,7 @@ const Toolbar = ({
     <Socket justification={Justify.right}>
       {rightSocketContent}
     </Socket>
-  </View>
+  </div>
 );
 
 

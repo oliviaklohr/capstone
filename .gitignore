@@ -1,5 +1,16 @@
-# misc.
-.vscode
+# dependency exclusions
 **/node_modules/**
+
+# dependency lock file exclusions
+package-lock.json
+yarn.lock
+
+# error-file exclusions
+yarn-error.log
+
+# storybook static-rendering files (MAY have to remove and commit in order to be static rendering, TBD)
+**/storybook-static/**
+
+
+# Misc. Exclusions
 .DS_Store
-.expo
