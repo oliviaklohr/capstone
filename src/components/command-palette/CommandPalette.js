@@ -17,7 +17,7 @@ const defaultProps = {
 const CommandPalette = () => {
   return(
     <div className={cx('command-palette')}>
-      Hello, world!
+      I don't understand what you want from dis bullsheeeeet.
     </div>
   );
 };

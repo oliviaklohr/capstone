@@ -18,7 +18,23 @@ const leftSocketData = [
   },
 ];
 
-// TODO: follow this pattern to generate content for the center socket
+const centerSocketData = [
+  {
+    iconName: 'Brush',
+    isDisabled: false,
+    onClick: () => window.alert('you have clicked the BRUSH item!'),
+  },
+  {
+    iconName: 'Create',
+    isDisabled: false,
+    onClick: () => window.alert('you have clicked the HIGHLIGHTER item!'),
+  },
+  {
+    iconName: 'Healing',
+    isDisabled: false,
+    onClick: () => window.alert('you have clicked the ERASER item!'),
+  }
+];
 
 const rightSocketData = [
   {
@@ -33,12 +49,10 @@ const rightSocketData = [
   }
 ];
 
-const Menubar = ({
-  onLeftElementPress,
-  onRightElementPress
-}) => (
+const Menubar = () => (
   <Toolbar
     leftSocketContent={generateMenuBarSocketMarkup(leftSocketData)}
+    centerSocketContent={generateMenuBarSocketMarkup(centerSocketData)}
     rightSocketContent={generateMenuBarSocketMarkup(rightSocketData)}
   />
 );
