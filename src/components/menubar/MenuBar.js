@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
-import { generateMenuBarSocketMarkup } from './_menuBarHelpers';
+import CommandPalette from '../command-palette/CommandPalette';
 
 import Toolbar from '../toolbar/Toolbar';
 
 import styles from './MenuBar.module.css';
 
 const cx = classNames.bind(styles);
-
 
 const leftSocketData = [
   {
@@ -51,9 +50,9 @@ const rightSocketData = [
 
 const Menubar = () => (
   <Toolbar
-    leftSocketContent={generateMenuBarSocketMarkup(leftSocketData)}
-    centerSocketContent={generateMenuBarSocketMarkup(centerSocketData)}
-    rightSocketContent={generateMenuBarSocketMarkup(rightSocketData)}
+    leftSocketContent={<CommandPalette items={leftSocketData} />}
+    centerSocketContent={<CommandPalette items={centerSocketData} />}
+    rightSocketContent={<CommandPalette items={rightSocketData} />}
   />
 );
 
