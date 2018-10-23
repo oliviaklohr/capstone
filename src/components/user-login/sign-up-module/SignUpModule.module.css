@@ -1,0 +1,19 @@
+.sign-up {
+  display: flex;
+  flex-direction: column;
+}
+
+.names-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.name {
+  display: inline-block;
+  width: calc(50% - 10px);
+}
+
+.sign-up-button {
+  align-self: flex-end;
+  display: inline-block;
+}
