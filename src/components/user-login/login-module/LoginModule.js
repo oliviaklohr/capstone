@@ -30,7 +30,7 @@ class LoginModule extends Component {
   }
 
   handleSubmit() {
-    // TODO: remove these alerts and repalce with either dispatching to the redux store, or not
+    // TODO: remove these alerts and replace with either dispatching to the redux store, or not
     if(this.validator()) {
       window.alert('input is valid!')
     }

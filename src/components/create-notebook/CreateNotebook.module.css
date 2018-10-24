@@ -1,0 +1,14 @@
+.create {
+  display: flex;
+  flex-direction: column;
+}
+
+.create-button {
+  align-self: flex-end;
+  display: inline-block;
+}
+
+.private-public-buttons {
+  align-self: flex-start;
+  display: inline-block;
+}
