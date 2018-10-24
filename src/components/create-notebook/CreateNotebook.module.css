@@ -1,14 +1,18 @@
-.create {
+.create-notebook {
   display: flex;
   flex-direction: column;
 }
 
-.create-button {
+.create-notebook-button {
   align-self: flex-end;
   display: inline-block;
 }
 
-.private-public-buttons {
-  align-self: flex-start;
-  display: inline-block;
+.create-notebook-row {
+  --verticalPadding: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: var(--verticalPadding);
+  padding-bottom: var(--verticalPadding);
 }

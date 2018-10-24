@@ -1,99 +1,110 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import Button from '@material-ui/core/Button/Button';
 import Input from '@material-ui/core/Input';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
+import ColorChooser from '../color-chooser/ColorChooser';
+
 
 import styles from './CreateNotebook.module.css';
 
 const cx = classNames.bind(styles);
 
-//TODO: GET LIV REDUX TOOLS ASAP
+const propTypes = {
+
+};
 
 class CreateNotebook extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      // WHOA SO MANY THINGS
       notebookName: '',
-      privateSelected: false,
-      publicSelected: false,
-      notebookError: false,
-      selectedError: false,
+      notebookNameError: false,
+      isPublic: false,
+      selectedColor: '',
     };
 
-    this.handleValueChange = this.handleValueChange.bind(this);
+    this.handleNotebookNameChange = this.handleNotebookNameChange.bind(this);
+    this.handlePublicToggle = this.handlePublicToggle.bind(this);
+    this.handleSelectedColorChange = this.handleSelectedColorChange.bind(this);
     this.validator = this.validator.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleValueChange(event, stateLabel) {
+  handleNotebookNameChange(event) {
     this.setState({
-      [`${stateLabel}`]: event.target.value,
+      notebookName: event.target.value,
     });
   }
 
-  // TODO: THIS IS RENDERING NOT-VALID NO MATTER WHAT I PUT IN SO THAT'S SOME BULLSHIT, BUT I'M SURE IT'S MY FAULT LOL.
-  // IT'S DEF CAUSE I FUCKED UP THE VALIDATOR.
-  handleSubmit() {
-    // TODO: remove these alerts and replace with either dispatching to the redux store, or not
-    if(this.validator()) {
-      window.alert('input is valid!')
-    }
-    else {
-      window.alert('input is NOT valid!')
-    }
+  handlePublicToggle(event) {
+    this.setState({
+      isPublic: event.target.checked,
+    });
   }
 
-  // ALLLLLLL SORTS OF BROKE
-  flip(value) {
-    return !value;
+  handleSelectedColorChange(selectedColor) {
+    this.setState({ selectedColor }, () => console.log('color changed!', this.state));
+  }
+
+  handleSubmit() {
+    // TODO: update
+    this.validator();
+    window.alert('submit clicked!');
   }
 
   validator() {
-    const { notebookName, privateSelected, publicSelected } = this.state;
+    const { notebookName } = this.state;
 
-    const notebookError = !(typeof notebookName === 'string' && notebookName.length > 0);
+    const notebookNameError = !(typeof notebookName === 'string' && notebookName.length > 0);
 
-    // I DON'T THINK I WANNA HANDLE THIS IN HERE BUT I DON'T WANT BOTH TO BE ABLE
-    // TO BE SELECTED AT ONCE AND I GOT CONFUSED SO HERE I AM
-    const selectedError = (!privateSelected && !publicSelected) || (privateSelected && publicSelected);
-
-    const canSubmit = !notebookError && !selectedError;
+    const canSubmit = !notebookNameError;
 
     this.setState({
-      notebookError,
-      selectedError,
+      notebookNameError,
     });
 
     return canSubmit;
   }
 
   render() {
-    const { notebookError, privateSelected, publicSelected } = this.state;
+    const { isPublic, notebookNameError } = this.state;
+
+    const switchControl = (
+      <Switch
+        checked={isPublic}
+        onChange={this.handlePublicToggle}
+      />
+    );
+
+    const switchMarkup = (<FormControlLabel label="Public" control={switchControl} />);
 
     return(
-      <div className={cx('create')}>
+      <div className={cx('create-notebook')}>
         <Input
-          name='notebookName'
-          error={notebookError}
-          onChange={(event) => this.handleValueChange(event, 'notebookName')}
+          name='Create Notebook'
+          error={notebookNameError}
+          onChange={this.handleNotebookNameChange}
           placeholder='Notebook Name'
           type='text'
         />
-        {/* DIS SHIT DON'T WORK BUT IDC I TRIED */}
-        {/* HOW TF DO I DO DIS */}
-        {/* I JUST WANNA FLIP THE VALUE ON THE CLICK, BRUH */}
-        <div className={cx('private-public-buttons')}>
-          <Button color='primary' onClick={this.flip(privateSelected)} value='Button'>Private</Button>
-          <Button color='primary' onClick={this.flip(publicSelected)} value='Button'>Public</Button>
+        <div className={cx('create-notebook-row')}>
+          {switchMarkup}
+          <div style={{ display: 'inline-block' }}>
+            <ColorChooser onClick={this.handleSelectedColorChange} colorOptionIcon="BookOutlined" colors={['red', 'orange', 'yellow', 'green', 'blue', 'purple']} />
+          </div>
         </div>
-        <div className={cx('create-button')}>
+        <div className={cx('create-notebook-button')}>
           <Button color='primary' onClick={this.handleSubmit} value='Submit'>Create Notebook</Button>
         </div>
       </div>
     );
   }
-};
+}
+
+CreateNotebook.propTypes = propTypes;
 
 export default CreateNotebook;

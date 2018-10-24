@@ -21,9 +21,9 @@ class CreateCategory extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleValueChange(event, stateLabel) {
+  handleValueChange(event) {
     this.setState({
-      [`${stateLabel}`]: event.target.value,
+      categoryValue: event.target.value,
     });
   }
 
@@ -59,7 +59,7 @@ class CreateCategory extends Component {
         <Input
           name='categoryValue'
           error={categoryError}
-          onChange={(event) => this.handleValueChange(event, 'categoryValue')}
+          onChange={this.handleValueChange}
           placeholder='Category Name'
           type='text'
         />
