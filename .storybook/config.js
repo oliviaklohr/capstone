@@ -1,7 +1,11 @@
+import React from 'react';
 import { setOptions } from '@storybook/addon-options';
 import { configure, addDecorator } from '@storybook/react';
 import { withKnobs } from '@storybook/addon-knobs/dist/react';
 import { setDefaults } from '@storybook/addon-info';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import rootReducer from '../src/state/reducers';
 
 // '@storybook/addon-options configuration
 setOptions({
@@ -10,8 +14,11 @@ setOptions({
   addonPanelInRight: true,
 });
 
-// WRAP ALL STORIES WITH WITHKNOBS, THIS NEEDS TO HAPPEN BEFORE ANY OTHER DECORATORS
+const store = createStore(rootReducer);
+
+// WRAP ALL STORIES WITH WITH KNOBS, THIS NEEDS TO HAPPEN BEFORE ANY OTHER DECORATORS
 addDecorator((story, context) => withKnobs(story, context));
+addDecorator((story) => <Provider store={store}>{story()}</Provider>);
 
 // addon-info
 setDefaults({

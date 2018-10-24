@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { color, number } from '@storybook/addon-knobs';
 
 
-import App from './App.js';
+import App from './App-container';
 
 
 storiesOf('App', module)
