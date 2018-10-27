@@ -1,30 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import shortid from 'shortid';
-import { FiberManualRecord } from '@material-ui/icons';
+import * as materialIcons from '@material-ui/icons';
 import classNames from 'classnames/bind';
 
 import styles from './ColorChooserItem.module.css';
 
 const cx = classNames.bind(styles);
 
+const FALLBACK_ICON = 'FiberManualRecord';
+
 const propTypes = {
   color: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
-  isDisabled: PropTypes.bool,
+  isSelected: PropTypes.bool,
+  icon: PropTypes.string,
 };
 
-const ColorChooserItem = ({ color, onClick, isDisabled }) => {
+const defaultProps = {
+  icon: FALLBACK_ICON,
+  isSelected: false,
+};
 
-  // const Icon = materialIcons.FiberManualRecord;
+const ColorChooserItem = ({ color, onClick, icon, isSelected }) => {
+  const Icon = materialIcons[icon] || materialIcons[FALLBACK_ICON];
+
+  const colorChooserClassNames = cx(['color-chooser-item', { 'selected': isSelected }]);
 
   return(
-    <div className={cx('color-chooser-item')} style={{color}} tabIndex='1' role='button' key={shortid.generate()} onClick={onClick} disabled={isDisabled}>
-      <FiberManualRecord />
+    <div className={colorChooserClassNames} style={{color}} tabIndex='1' role='button' key={shortid.generate()} onClick={() => onClick(color)}>
+      <Icon />
     </div>
   );
 };
 
 ColorChooserItem.propTypes = propTypes;
+ColorChooserItem.defaultProps = defaultProps;
 
 export default ColorChooserItem;

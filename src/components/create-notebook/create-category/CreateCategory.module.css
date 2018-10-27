@@ -1,0 +1,9 @@
+.category {
+  display: flex;
+  flex-direction: column;
+}
+
+.category-button {
+  align-self: flex-end;
+  display: inline-block;
+}

@@ -1,6 +1,5 @@
 .color-chooser {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   padding: 5px;
 };
