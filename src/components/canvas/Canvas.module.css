@@ -1,0 +1,10 @@
+.canvas{
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  min-width: 200px; /* TODO: determine if we want to leave this minimum enforcement */
+  min-height: 200px; /* TODO: determine if we want to leave this minimum enforcement */
+  z-index: -1;
+}

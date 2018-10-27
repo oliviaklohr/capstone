@@ -1,0 +1,13 @@
+.notebook {
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.icon {
+  line-height: 0;
+  font-size: 48px;
+  margin-right: 5px;
+}
