@@ -1,4 +1,9 @@
 .color-chooser-item {
+  /* box-sizing: border-box; */
   display: inline-block;
   line-height: 0;
-};
+}
+
+.selected {
+  border-bottom: 1px solid #2979FF;
+}
