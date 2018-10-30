@@ -1,16 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 import './index.css';
-import App from './components/app/App-container.js';
+import "typeface-roboto";
+import App from './components/app/App.js';
 import * as serviceWorker from './serviceWorker';
 import { store } from './state/appStore';
 
 import { Provider } from 'react-redux';
 
 const WrappedApp = () => (
-  <Provider store={store}>
-    <App />
-  </Provider>
+  <BrowserRouter>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </BrowserRouter>
 );
 
 ReactDOM.render(<WrappedApp />, document.getElementById('root'));

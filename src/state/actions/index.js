@@ -1,15 +1,9 @@
-import { documentsActions, documentsActionTypes } from './documents';
-import { usersActions, usersActionTypes } from './users';
-import { sessionActions, sessionActionTypes } from './session';
+import { userActions, userActionTypes } from './user';
 
 export const actions = {
-  ...documentsActions,
-  ...usersActions,
-  ...sessionActions,
+  ...userActions,
 };
 
 export const actionTypes = {
-  ...documentsActionTypes,
-  ...usersActionTypes,
-  ...sessionActionTypes
+  ...userActionTypes,
 };
