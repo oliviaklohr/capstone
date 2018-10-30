@@ -1,9 +1,0 @@
-.log-in {
-  display: flex;
-  flex-direction: column;
-}
-
-.log-in-button {
-  align-self: flex-end;
-  display: inline-block;
-}

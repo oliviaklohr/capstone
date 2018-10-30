@@ -8,10 +8,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  createNewUser: actions.createNewUser,
-  changeOpenDocument: actions.changeOpenDocument,
-  closeOpenDocument: actions.closeOpenDocument,
-  fetchDocument: actions.fetchDocument,
+
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TestReduxComponent);

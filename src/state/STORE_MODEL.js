@@ -2,7 +2,7 @@ const notebook = {
   notebookID: '~~~',
   ownerID: '~~~',
   title: '~~~',
-  created: '~~~',
+  category: '~~~',
   dateCreated: '~~~',
   lastModified: '~~~', // could be derived from the last time a page was modified
 };
@@ -16,9 +16,12 @@ const page = {
   lastEdited: '~~~',
 };
 
+// ----------------------------------------------------------------------------
+
 const store_model = {
   user: {
     isFetching: true || false,
+    lastFetchStatus: -1, // -1 is unset
     userID: '~~~',
     firstName: '~~~',
     lastName: '~~~',
