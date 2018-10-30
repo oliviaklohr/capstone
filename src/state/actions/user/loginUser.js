@@ -18,7 +18,7 @@ const success = ({
   lastName,
   email,
   dateCreated,
-  isActive,
+  isDeleted,
   password,
 }) => ({
   type: LOGIN_USER_SUCCESS,
@@ -28,7 +28,7 @@ const success = ({
   lastName,
   email,
   dateCreated,
-  isActive,
+  isDeleted,
   password,
 });
 

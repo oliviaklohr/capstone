@@ -5,9 +5,9 @@ export const setUserDetails = ({
   lastName,
   email,
   dateCreated,
-  isActive,
+  isDeleted,
   password,
-}) => isActive
+}) => !isDeleted
   ? ({
     lastFetchStatus: status,
     userId,
@@ -15,7 +15,7 @@ export const setUserDetails = ({
     lastName,
     email,
     dateCreated,
-    isActive,
+    isDeleted,
     password,
   })
   : {};
