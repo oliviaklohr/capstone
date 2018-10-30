@@ -1,10 +1,11 @@
 const notebook = {
-  notebookID: '~~~',
-  ownerID: '~~~',
+  notebookId: '~~~',
+  ownerId: '~~~',
   title: '~~~',
   category: '~~~',
+  isDeleted: true || false,
   dateCreated: '~~~',
-  lastModified: '~~~', // could be derived from the last time a page was modified
+  lastEdited: '~~~', // could be derived from the last time a page was modified
 };
 
 // ----------------------------------------------------------------------------

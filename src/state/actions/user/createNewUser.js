@@ -37,7 +37,7 @@ const success = ({
   lastName,
   email,
   dateCreated,
-  isActive,
+  isDeleted,
   password,
 }) => ({
   type: CREATE_NEW_USER_SUCCESS,
@@ -47,7 +47,7 @@ const success = ({
   lastName,
   email,
   dateCreated,
-  isActive,
+  isDeleted,
   password,
 });
 
