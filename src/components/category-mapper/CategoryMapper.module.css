@@ -1,0 +1,10 @@
+.category-mapper {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+.category-section-wrapper {
+  margin-bottom: 15px
+}

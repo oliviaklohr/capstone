@@ -26,7 +26,7 @@ function* postNewUser(action) {
           lastName: data.lastname || 'FALLBACK: lastName',
           email: data.email || 'FALLBACK: email',
           dateCreated: data.datecreated || 'FALLBACK: dateCreated',
-          isActive: data.isactive || 'FALLBACK: isActive',
+          isDeleted: data.isdeleted,
           password: data.props.password || 'FALLBACK: password',
         }));
         break;
