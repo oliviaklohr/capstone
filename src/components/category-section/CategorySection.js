@@ -8,7 +8,7 @@ const cx = classNames.bind(styles);
 
 const propTypes = {
   name: PropTypes.string.isRequired,
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
 };
 
 const CategorySection = ({

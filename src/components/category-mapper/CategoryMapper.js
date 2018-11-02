@@ -11,14 +11,19 @@ const cx = classNames.bind(styles);
 
 const propTypes = {
   notebooks: PropTypes.arrayOf( notebookItemStoreShape ),
+  additionalCategories: PropTypes.arrayOf(PropTypes.string),
 };
 
 const defaultProps = {
-  notebooks: []
+  notebooks: [],
+  additionalCategories: [],
 };
 
-const CategoryMapper = ({ notebooks }) => {
-  const possibleCategories = notebooks.map(({ category }) => category);
+const CategoryMapper = ({ notebooks, additionalCategories }) => {
+  const possibleCategories = [
+    ...notebooks.map(({ category }) => category),
+    ...additionalCategories,
+  ];
 
   const arrayOfNotebookCategoryObjects = possibleCategories.map((category) => ({
     [category]: [],
@@ -44,19 +49,18 @@ const CategoryMapper = ({ notebooks }) => {
             {categories[category].map(({
               notebookId,
               ownderId,
-              isVisisble,
+              isPublic,
               title,
-              isDeleted,
               dateCreated,
               lastEdited,
-              notebookColor,
+              color,
             }) => (
               <Notebook
                 title={title}
-                isVisible={isVisisble}
+                isVisible={isPublic}
                 dateCreated={dateCreated}
                 lastModified={lastEdited}
-                notebookColor={notebookColor}
+                notebookColor={color}
                 onClick={() => window.alert(`You've clicked notebook ${title}`)}
               />
             ))}
