@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
-import shortid from 'shortid';
 import ColorChooserItem from './color-chooser-item/ColorChooserItem';
 
 import styles from './ColorChooser.module.css';
@@ -10,25 +9,58 @@ const cx = classNames.bind(styles);
 
 const propTypes = {
   colors: PropTypes.arrayOf(PropTypes.string).isRequired,
-  onClick: PropTypes.func,
+  /** callback triggered on a color selected */
+  onColorSelection: PropTypes.func,
   colorOptionIcon: PropTypes.string,
 };
 
 const defaultProps = {
-  onClick: () => {},
+  onColorSelection: null,
   colorOptionIcon: undefined,
 };
 
-const ColorChooser = ({ colors, onClick, colorOptionIcon}) => {
-  const colorsMarkup = colors.map(color => <ColorChooserItem key={shortid.generate()} color={color} onClick={onClick} icon={colorOptionIcon} />);
+class ColorChooser extends Component {
+  constructor(props) {
+    super(props);
 
-  return(
-    <div className={cx('color-chooser')}>
-      {colorsMarkup}
-    </div>
-  );
-};
+    this.state = {
+      selectedColor: '',
+    };
 
+    this.handleOnClick = this.handleOnClick.bind(this);
+  }
+
+  handleOnClick(color) {
+    const { onColorSelection } = this.props;
+
+    this.setState({
+      selectedColor: color,
+    });
+
+    if (onColorSelection) { 
+      return onColorSelection( color );
+    }
+  }
+
+  render() {
+    const { colors, colorOptionIcon } = this.props;
+    const { selectedColor } = this.state;
+
+    return(
+      <div className={cx('color-chooser')}>
+        {colors.map(color => (
+          <ColorChooserItem
+            isSelected={selectedColor === color}
+            key={`color_${color}`}
+            color={color}
+            onClick={this.handleOnClick}
+            icon={colorOptionIcon}
+          />
+        ))}
+      </div>
+    );
+  }
+}
 
 ColorChooser.propTypes = propTypes;
 ColorChooser.defaultProps = defaultProps;

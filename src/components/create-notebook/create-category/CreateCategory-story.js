@@ -7,7 +7,7 @@ storiesOf('CreateCategory', module)
   .add('Basic CreateCategory Example', () => {
 
     return(
-      <CreateCategory />
+      <CreateCategory onSubmit={() => console.log('create category clicked!')} />
     );
   }
 );

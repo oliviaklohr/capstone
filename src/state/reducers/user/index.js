@@ -8,6 +8,7 @@ const {
   CREATE_NEW_USER_FAILURE,
   LOGIN_USER,
   LOGIN_USER_SUCCESS,
+  LOGIN_USER_FAILURE,
 } = actionTypes;
 
 const initialState = {
@@ -15,7 +16,20 @@ const initialState = {
   lastFetchStatus: -1, // UN-FETCHED
 };
 
-export const user = (state = initialState, action = {}) => {
+// TODO: remvoe before aftually demoing the app or deploying to a server
+const autoLoginInitialState = {
+  isFetching: false,
+  lastFetchStatus: 200,
+  userId: 2,
+  firstName: "dylan",
+  lastName: "klohr",
+  email: "dylan.klohr@gmail.com",
+  dateCreated: "2018-10-30T13:19:55.201Z",
+  isDeleted: false,
+  password: "password",
+};
+
+export const user = (state = autoLoginInitialState, action = {}) => {
   const { type, ...actionContents } = action;
 
   switch (type) {
@@ -45,6 +59,11 @@ export const user = (state = initialState, action = {}) => {
         ...state,
         ...setUserIsFetching( false ),
         ...setUserDetails( actionContents ),
+      };
+    case LOGIN_USER_FAILURE:
+      return {
+        ...state,
+        ...setUserIsFetching( false ),
       };
     default:
       return state;

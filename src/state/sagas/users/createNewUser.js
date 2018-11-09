@@ -16,18 +16,15 @@ function* postNewUser(action) {
     const data = responseData[0];
     switch (status) {
       case 200:
-// TODO: show success message about having successfully creating a user
-// TODO: trigger redirect back to login page
-
         yield put(actions.createNewUser.success({
           status,
-          userId: data.userid || 'FALLBACK: userId',
-          firstName: data.firstname || 'FALLBACK: firstName',
-          lastName: data.lastname || 'FALLBACK: lastName',
-          email: data.email || 'FALLBACK: email',
-          dateCreated: data.datecreated || 'FALLBACK: dateCreated',
+          userId: data.userid,
+          firstName: data.firstname,
+          lastName: data.lastname,
+          email: data.email,
+          dateCreated: data.datecreated,
           isDeleted: data.isdeleted,
-          password: data.props.password || 'FALLBACK: password',
+          password: data.props.password,
         }));
         break;
       default:
