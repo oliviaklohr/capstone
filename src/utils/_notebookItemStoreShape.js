@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 
 export const notebookItemStoreShape = PropTypes.shape({
-  notebookId: PropTypes.string.isRequired,
-  ownerId: PropTypes.string.isRequired,
+  notebookId: PropTypes.number.isRequired,
+  ownerId: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   dateCreated: PropTypes.string.isRequired,

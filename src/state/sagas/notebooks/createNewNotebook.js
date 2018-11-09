@@ -1,6 +1,7 @@
 import { takeLatest, put, call } from 'redux-saga/effects';
 import { actions, actionTypes } from '../../actions';
-import Api from '../../../utils/api';
+import { transformDbNbToStoreNb } from './helpers/transformDbNbToStoreNb';
+import Api from '../../api';
 
 const {
   CREATE_NEW_NOTEBOOK,
@@ -18,15 +19,7 @@ function* postNewNotebook(action) {
       case 200:
         yield put(actions.createNewNotebook.success({
           status,
-          notebookId: data.notebookid,
-          ownerId: data.ownerid,
-          title: data.title,
-          category: data.category || 'Uncategorized',
-          isDeleted: data.isdeleted,
-          dateCreated: data.datecreated,
-          lastEdited: data.lastedited,
-          color: data.props.color,
-          isPublic: data.props.isPublic,
+          ...transformDbNbToStoreNb( data ),
         }));
         break;
       default:

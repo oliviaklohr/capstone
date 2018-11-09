@@ -1,6 +1,8 @@
 import { takeLatest, put, call } from 'redux-saga/effects';
 import { actions, actionTypes } from '../../actions';
-import Api from '../../../utils/api';
+import { transformDbPageToStorePage } from './helpers/transformDbPageToStorePage';
+import Api from '../../api';
+
 
 const {
   CREATE_NEW_PAGE,
@@ -18,13 +20,7 @@ function* postNewPage(action) {
       case 200:
         yield put(actions.createNewPage.success({
           status,
-          pageId: data.pageid,
-          notebookId: data.notebookid,
-          ownerId: data.ownerid,
-          canvasImg: data.canvasimg,
-          isDeleted: data.isdeleted,
-          dateCreated: data.datecreated,
-          lastEdited: data.lastedited,
+          ...transformDbPageToStorePage( data ),
         }));
         break;
       default:

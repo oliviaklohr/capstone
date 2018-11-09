@@ -10,7 +10,7 @@ const mapStateToProps = state => {
   if (user.isFetching) { 
     signUpStatus = Status.isLoading;
   }
-  else if (!user.isFetching && user.lastFetchStatus === -1) {
+  else if (!user.isFetching && !user.lastFetchStatus) {
     signUpStatus = Status.awaitingSignup;
   }
   else if (!user.isFetching && user.lastFetchStatus === 200) {
