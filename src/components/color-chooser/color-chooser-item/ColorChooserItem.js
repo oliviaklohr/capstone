@@ -26,9 +26,10 @@ const ColorChooserItem = ({ color, onClick, icon, isSelected }) => {
   const Icon = materialIcons[icon] || materialIcons[FALLBACK_ICON];
 
   const colorChooserClassNames = cx(['color-chooser-item', { 'selected': isSelected }]);
+  const returnColor = isSelected ? '' : color;
 
   return(
-    <div className={colorChooserClassNames} style={{color}} tabIndex='1' role='button' key={shortid.generate()} onClick={() => onClick(color)}>
+    <div className={colorChooserClassNames} style={{color}} tabIndex='1' role='button' key={shortid.generate()} onClick={() => onClick(returnColor)}>
       <Icon />
     </div>
   );

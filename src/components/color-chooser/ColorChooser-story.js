@@ -8,7 +8,7 @@ storiesOf('ColorChooser', module)
   .add('Basic ColorChooser Example', () => {
 
     return(
-      <ColorChooser colors={['red', 'orange', 'yellow', 'blue', 'purple']} colorOnClick={(color) => window.alert(color)} />
+      <ColorChooser colors={['red', 'orange', 'yellow', 'blue', 'purple']} onColorSelection={(color) => window.alert(color)} />
     );
   }
 );

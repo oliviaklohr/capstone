@@ -44,7 +44,7 @@ class CategoryDropdown extends Component {
   }
 
   convertOptionToItem(option) {
-    return (<MenuItem value={option}>{option}</MenuItem>);
+    return (<MenuItem key={option} value={option}>{option}</MenuItem>);
   }
 
   render() {

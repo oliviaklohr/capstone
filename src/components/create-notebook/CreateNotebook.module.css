@@ -1,11 +1,12 @@
 .create-notebook {
   display: flex;
   flex-direction: column;
+  padding: 20px;
 }
 
 .create-notebook-button {
-  align-self: flex-end;
-  display: inline-block;
+  display: flex;
+  justify-content: space-between;
 }
 
 .create-notebook-row {

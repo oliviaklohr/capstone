@@ -1,9 +1,9 @@
 .color-chooser-item {
-  /* box-sizing: border-box; */
   display: inline-block;
   line-height: 0;
+  border-bottom: 2px solid transparent;
 }
 
 .selected {
-  border-bottom: 1px solid #2979FF;
+  border-bottom: 2px solid #2979FF;
 }

@@ -6,14 +6,16 @@ const notebook = {
   isDeleted: true || false,
   dateCreated: '~~~',
   lastEdited: '~~~', // could be derived from the last time a page was modified
+  color: '~~~',
+  isPublic: true || false,
 };
 
 // ----------------------------------------------------------------------------
 
 const page = {
-  pageID: 'abcdefghijklmnopqr',
+  pageID: 'abcdefghijklmnopqr', // being generated
   notebookID: 'stuvwxyz',
-  dateCreated: '~~~', // NOTE: we WILL be sorting pages WITHIN  notebook by this value
+  dateCreated: '~~~', // NOTE: we WILL be sorting pages WITHIN notebook by this value
   lastEdited: '~~~',
 };
 
@@ -33,7 +35,7 @@ const store_model = {
     isFetching: true || false,
     activeNotebookId: '~~~',
     isNotebookActive: true || false,
-    byNotebookID: {
+    byNotebookId: {
       [notebook.notebookID]: notebook,
       // ... multiple instances of above
     }

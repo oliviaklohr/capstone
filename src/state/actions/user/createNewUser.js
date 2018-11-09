@@ -41,7 +41,7 @@ const success = ({
   password,
 }) => ({
   type: CREATE_NEW_USER_SUCCESS,
-  status,
+  lastFetchStatus: status,
   userId,
   firstName,
   lastName,
