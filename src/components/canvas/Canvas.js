@@ -31,6 +31,7 @@ const drawLine = async (start, end, ctx, penColor, lineWidth) => {
 const propTypes = {
   /** any css-parseable color value */
   penColor: PropTypes.string.isRequired,
+  lineWidth: PropTypes.number.isRequired,
   // saveDocument: PropTypes.func.isRequired,
   // createDocument: PropTypes.func.isRequired,
   // openDocument: PropTypes.object.isRequired,
@@ -77,6 +78,13 @@ class Canvas extends Component {
     window.addEventListener('resize', this.updateWindowDimensions);
     componentDidMountEventListeners(this.getCanvas());
     this.displayPage();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.page.pageId !== this.props.page.pageId) {
+      this.resetBoard();
+      this.displayPage();
+    }
   }
   
   componentWillUnmount() {
@@ -146,7 +154,7 @@ class Canvas extends Component {
       height: innerHeight,
     })
 
-    const newContext = new CanvasRenderingContext2D();
+    const newContext = this.getContext();
     newContext.putImageData(prevImageData, 0, 0);
     this.context = newContext;
   }
@@ -181,7 +189,6 @@ class Canvas extends Component {
 
   render() {
     const { width, height } = this.state;
-    // const { openDocument, saveDocument } = this.props;
 
     return(
       <Fragment>

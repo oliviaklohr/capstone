@@ -22,19 +22,17 @@ const success = ({
   isDeleted,
   dateCreated,
   lastEdited,
-}) => {
-  return({
-    type: CREATE_NEW_PAGE_SUCCESS,
-    status,
-    pageId,
-    notebookId,
-    ownerId,
-    canvasImg,
-    isDeleted,
-    dateCreated,
-    lastEdited,
-  });
-};
+}) => ({
+  type: CREATE_NEW_PAGE_SUCCESS,
+  status,
+  pageId,
+  notebookId,
+  ownerId,
+  canvasImg,
+  isDeleted,
+  dateCreated,
+  lastEdited,
+});
 
 const failure = ({ status }) => ({
   type: CREATE_NEW_PAGE_FAILURE,

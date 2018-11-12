@@ -36,6 +36,9 @@ function* postNewUser(action) {
   }
   catch (error) {
     console.log('POST NEW USER ERROR: ', error);
+    yield put(actions.createNewUser.failure({
+      status: -1,
+    }));
   }
 }
 

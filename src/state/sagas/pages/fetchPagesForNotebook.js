@@ -37,6 +37,9 @@ function* fetchPagesForNotebook(action) {
   }
   catch (error) {
     console.log('FETCH PAGES FOR NOTEBOOK ERROR: ', error);
+    yield put(actions.createNewPage.failure({
+      status: -1,
+    }));
   }
 }
 

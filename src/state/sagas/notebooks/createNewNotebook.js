@@ -31,6 +31,9 @@ function* postNewNotebook(action) {
   }
   catch (error) {
     console.log('POST NEW NOTEBOOK ERROR: ', error);
+    yield put(actions.createNewNotebook.failure({
+      status: -1,
+    }));
   }
 }
 
