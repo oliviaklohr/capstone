@@ -1,23 +1,28 @@
 import { connect } from 'react-redux';
 import { actions } from '../../state/actions';
-
 import Canvas from './Canvas';
 
-const mapStateToProps = state => {
-  const { byDocumentId, documentOpen, openDocumentId } = state.documents;
-  
-  const openDocument = (documentOpen && !!(openDocumentId) && !!(byDocumentId))
-    ? byDocumentId[openDocumentId]
-    : null;
+const mapStateToProps = ({ pages }, ownProps) => ({
+  ...ownProps,
+  pageId: pages.activePageId,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  dispatch
+});
+
+const mergeProps = (propsFromState, propsFromDispatch) => {
+  const { pageId, ...otherPropsFromState } = propsFromState;
+  const { dispatch, ...otherPropsFromDispatch } = propsFromDispatch;
+
+  const savePage = ({ pageData }) => dispatch(actions.savePageData({ pageId, pageData }));
 
   return {
-    openDocument
+    ...otherPropsFromState,
+    ...otherPropsFromDispatch,
+    savePage,
   };
 };
 
-const mapDispatchToProps = {
-  createDocument: actions.createDocument,
-  saveDocument: actions.saveDocument,
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Canvas);
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Canvas);

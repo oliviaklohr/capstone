@@ -1,8 +1,9 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 
 import { componentDidMountEventListeners, componentWillUnmountEventListeners } from './helpers/_eventBindings';
+import { getX, getY } from './helpers/_touchEventHelpers';
 
 import styles from './Canvas.module.css';
 
@@ -32,7 +33,17 @@ const propTypes = {
   penColor: PropTypes.string.isRequired,
   // saveDocument: PropTypes.func.isRequired,
   // createDocument: PropTypes.func.isRequired,
-  openDocument: PropTypes.object.isRequired,
+  // openDocument: PropTypes.object.isRequired,
+  page: PropTypes.shape({
+    pageId: PropTypes.number.isRequired,
+    notebookId: PropTypes.number.isRequired,
+    ownerId: PropTypes.number.isRequired,
+    canvasImg: PropTypes.object, // TODO: we should actually probably be changing the saga / action / reducer that records this information to the store to simply write the raw data
+    isDeleted: PropTypes.bool.isRequired,
+    dateCreated: PropTypes.string.isRequired,
+    lastEdited: PropTypes.string.isRequired,
+  }).isRequired,
+  savePage: PropTypes.func.isRequired,
 };
 
 class Canvas extends Component {
@@ -54,24 +65,21 @@ class Canvas extends Component {
     this.handleDraw = this.handleDraw.bind(this);
     this.getCanvas = this.getCanvas.bind(this);
     this.getContext = this.getContext.bind(this);
-    this.displayDocument = this.displayDocument.bind(this);
-
+    this.displayPage = this.displayPage.bind(this);
 
     // create and bind a unique reference to the canvas
     this.canvas = React.createRef();
-
     this.coords = [];
-
-    // Socket.on('draw', this.handleDraw) TODO: replace
   }
 
-  componentDidMount(){
+  componentDidMount() {
     // AppStore.addChangeListener('DELETE_BOARD', this.resetBoard)
     window.addEventListener('resize', this.updateWindowDimensions);
     componentDidMountEventListeners(this.getCanvas());
+    this.displayPage();
   }
   
-  componentWillUnmount(){
+  componentWillUnmount() {
     window.removeEventListener('resize', this.updateWindowDimensions);
     componentWillUnmountEventListeners(this.getCanvas());
   }
@@ -94,22 +102,8 @@ class Canvas extends Component {
 
     if(!isDrawing) { return; }
 
-    const isTouchEvent = !!(
-      // NOTE: this indexing into `event.nativeEvent.touches` will have to be updated before multi-touch can be supported
-      event &&
-      event.touches &&
-      event.touches[0] &&
-      event.touches[0].clientX &&
-      event.touches[0].clientY
-    );
-
-    const x = isTouchEvent
-      ? event.touches[0].clientX
-      : event.clientX;
-
-    const y = isTouchEvent
-      ? event.touches[0].clientY
-      : event.clientY;
+    const x = getX(event);
+    const y = getY(event);
 
     const XY = { x, y };
 
@@ -126,22 +120,27 @@ class Canvas extends Component {
 
   handleMouseDown() {
     this.isDrawing = true;
-
     this.setState(() => ({ isDrawing: true}));
   }
   
   handleMouseUp() {
-    // Socket.emit('draw', this.coords)
+    const { isDrawing } = this.state;
+    if (!isDrawing) { return; }
+
+    const { savePage } = this.props;
     this.setState(() => ({ isDrawing: false}));
     this.coords = [];
+    
+    savePage({
+      pageData: this.getCanvas().toDataURL(),
+    });
   }
 
   updateWindowDimensions() {
     const context = this.getContext();
     const { innerWidth, innerHeight } = window;
-
     const prevImageData = context.getImageData(0, 0, innerWidth, innerHeight);
-
+    
     this.setState({
       width: innerWidth,
       height: innerHeight,
@@ -169,41 +168,38 @@ class Canvas extends Component {
     }
   }
 
-  displayDocument() {
-    const { openDocument } = this.props;
-    if (!openDocument) return;
+  displayPage() {
+    const { page } = this.props;
+    if (!page) return;
 
     const ctx = this.getContext();
     const img = new Image();
     img.onload = () => ctx.drawImage(img, 0, 0);
 
-    img.src = openDocument.dataURL;
+    img.src = page.canvasImg;
   }
 
   render() {
     const { width, height } = this.state;
-    const { openDocument, saveDocument } = this.props;
+    // const { openDocument, saveDocument } = this.props;
 
     return(
       <Fragment>
-          <canvas
-            id="myCanvas"
-            className={cx('canvas')}
-            width={width}
-            height={height}
-            ref={this.canvas}
-            onMouseDown={this.handleMouseDown}
-            onTouchStart={this.handleMouseDown}
-            onMouseMove={this.handleMouseMove}
-            onTouchMove={this.handleMouseMove}
-            onMouseUp={this.handleMouseUp}
-            onTouchEnd={this.handleMouseUp}
-            onMouseLeave={this.handleMouseUp}
-          />
-        <button onClick={() => saveDocument({ id: openDocument.id, dataURL: this.getCanvas().toDataURL()})}>Save Document</button>
-        {openDocument &&
-          <button onClick={this.displayDocument}>Display Document</button>
-        }
+        <canvas
+          id="myCanvas"
+          className={cx('canvas')}
+          width={width}
+          height={height}
+          ref={this.canvas}
+          onMouseDown={this.handleMouseDown}
+          onTouchStart={this.handleMouseDown}
+          onMouseMove={this.handleMouseMove}
+          onTouchMove={this.handleMouseMove}
+          onMouseUp={this.handleMouseUp}
+          onTouchEnd={this.handleMouseUp}
+          onMouseLeave={this.handleMouseUp}
+        />
+        {/* <button onClick={() => saveDocument({ id: openDocument.id, dataURL: this.getCanvas().toDataURL()})}>Save Document</button> */}
       </Fragment>
     );
   }

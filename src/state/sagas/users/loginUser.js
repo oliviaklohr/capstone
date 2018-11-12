@@ -1,6 +1,6 @@
 import { takeLatest, put, call } from 'redux-saga/effects';
 import { actions, actionTypes } from '../../actions';
-import Api from '../../../utils/api';
+import Api from '../../api';
 
 const {
   LOGIN_USER,

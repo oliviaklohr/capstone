@@ -1,42 +1,75 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import MenuBar from '../menubar/MenuBar';
 import Canvas from '../canvas/Canvas-container';
 
-// TODO: this will be removed... eventually
-import TestReduxComponent from '../test-redux-component/TestReduxComponent-container';
-
 const propTypes = {
-  menubarProps: PropTypes.object,
-  canvasProps: PropTypes.object,
-  createSession: PropTypes.func.isRequired,
-  openDocumentId: PropTypes.string,
-  createDocument: PropTypes.func.isRequired,
+  page: PropTypes.shape({
+    pageId: PropTypes.number.isRequired,
+    notebookId: PropTypes.number.isRequired,
+    ownerId: PropTypes.number.isRequired,
+    // canvasImg: , // TODO: figure out wtf this is
+    dateCreated: PropTypes.string.isRequired,
+    lastEdited: PropTypes.string.isRequired,
+  }),
+  pageIds: PropTypes.arrayOf( PropTypes.number.isRequired ),
+  isLoading: PropTypes.bool.isRequired,
+  fetchPagesForNotebook: PropTypes.func.isRequired,
+  setActivePageId: PropTypes.func.isRequired,
+  createNewPage: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
-  menubarProps: {},
-  canvasProps: {},
-  openDocumentId: undefined,
+  page: null,
+  pageIds: null,
 };
 
-class Whiteboard extends Component {
 
+class Whiteboard extends Component {
   componentDidMount() {
-    // TODO: we'll want to pass in the userId here when creating a new session, once it's been retrieved from the back end
-    this.props.createSession({ userId: 'user_hVS1WWovD__2018-10-18T09:37:10-05:00' });
+    const { fetchPagesForNotebook, pageIds, page } = this.props;
+    
+    if (!pageIds && !page) {
+      fetchPagesForNotebook();
+    }
   }
 
   render() {
-    const { createDocument, menubarProps, openDocumentId, canvasProps } = this.props;
+    const {
+      createNewPage,
+      page,
+      pageIds,
+      isLoading,
+      menubarProps,
+      canvasProps,
+      setActivePageId,
+    } = this.props;
+    
+    const loadingSpinner = ( <CircularProgress size={100} /> );
+
+    const whiteboardContent = (
+      <Fragment>
+        <MenuBar onMenuClick={createNewPage} {...menubarProps} />
+        { page && 
+          <Canvas page={page} penColor='red' {...canvasProps} />
+        }
+      </Fragment>
+    );
+
+    const shouldDisplayLoadingSpinner = isLoading || !pageIds || !page;
+
+    const content = shouldDisplayLoadingSpinner
+      ? loadingSpinner
+      : whiteboardContent;
+    
+    if(pageIds && !page){
+      setActivePageId({ pageId: pageIds[0] });
+    }
+
     return(
       <div>
-        <MenuBar {...menubarProps} />
-        <TestReduxComponent />
-        <button onClick={() => createDocument()}>Create Document</button>
-        { openDocumentId && 
-          <Canvas penColor='red' {...canvasProps} />
-        }
+        {content}
       </div>
     );
   }

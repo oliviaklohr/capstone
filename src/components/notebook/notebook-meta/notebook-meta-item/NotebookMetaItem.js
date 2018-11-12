@@ -23,7 +23,7 @@ const NotebookMetaItem = ({
   children,
 }) => {
   const child = isTime
-    ? moment(children).format("MMM Do YY")
+    ? moment(children).format("MM-DD-YY, h:mm")
     : children;
 
   return(
