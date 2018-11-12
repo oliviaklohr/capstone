@@ -3,9 +3,6 @@ import { uniq as _uniq } from 'lodash';
 import CreateNotebook from './CreateNotebook';
 import { actions } from '../../state/actions/index';
 
-// TODO: replace with real categories read from the store
-const mock_categories = ['foo', 'bar', 'baz'];
-
 const mapStateToProps = ({ notebooks, user }, ownProps) => {
   const userId = user.userId;
   const notebooksByNotebookId = notebooks.byNotebookId;

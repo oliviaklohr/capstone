@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import { notebookItemStoreShape } from '../../utils/_notebookItemStoreShape';
-import Notebook from '../notebook/Notebook';
+import Notebook from '../notebook/Notebook-container';
 import CategorySection from '../category-section/CategorySection';
 
 import styles from './CategoryMapper.module.css';
@@ -44,7 +44,7 @@ const CategoryMapper = ({ notebooks, additionalCategories }) => {
   return(
     <div className={cx('category-mapper')}>
       {Object.keys(categories).map((category) => (
-        <div className={cx('category-section-wrapper')}>
+        <div className={cx('category-section-wrapper')} key={category}>
           <CategorySection name={category}>
             {categories[category].map(({
               notebookId,
@@ -56,12 +56,13 @@ const CategoryMapper = ({ notebooks, additionalCategories }) => {
               color,
             }) => (
               <Notebook
+                key={notebookId}
                 title={title}
                 isVisible={isPublic}
                 dateCreated={dateCreated}
                 lastModified={lastEdited}
                 notebookColor={color}
-                onClick={() => window.alert(`You've clicked notebook ${title}`)}
+                notebookId={notebookId}
               />
             ))}
           </CategorySection>

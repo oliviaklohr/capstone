@@ -24,7 +24,7 @@ const page = {
 const store_model = {
   user: {
     isFetching: true || false,
-    lastFetchStatus: -1, // -1 is unset
+    // lastFetchStatus: -1, // -1 is unset
     userID: '~~~',
     firstName: '~~~',
     lastName: '~~~',
@@ -34,7 +34,6 @@ const store_model = {
   notebooks: {
     isFetching: true || false,
     activeNotebookId: '~~~',
-    isNotebookActive: true || false,
     byNotebookId: {
       [notebook.notebookID]: notebook,
       // ... multiple instances of above
@@ -42,7 +41,7 @@ const store_model = {
   },
   pages: {
     isFetching: true || false,
-    activePageID: '~~~', // should NEVER have a value here, if `notebooks.isNotebookActive` is false,
+    activePageId: '~~~', // should NEVER have a value here, if `notebooks.isNotebookActive` is false,
     byPageID: {
       [page.pageID]: page,
       // ... multiple instances of above

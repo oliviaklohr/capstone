@@ -17,7 +17,7 @@ const propTypes = {
   lastModified: PropTypes.string.isRequired,
   notebookColor: PropTypes.string,
   // TODO: onCLick that will dispatch to redux the notebook that we want to load
-  onClick: PropTypes.func.isRequired,
+  openNotebook: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
@@ -31,12 +31,12 @@ const Notebook = ({
   dateCreated,
   lastModified,
   notebookColor,
-  onClick,
+  openNotebook,
 }) => {
   const visibilityMode = isVisible ? 'Public' : 'Private';
 
   return (
-    <div tabIndex='1' role='button' onClick={onClick}>
+    <div tabIndex='1' role='button' onClick={openNotebook}>
       <Card>
         <div className={cx('notebook')}>
           <span className={cx('icon')} style={{ color: notebookColor }}><BookOutlined fontSize='inherit' /></span>

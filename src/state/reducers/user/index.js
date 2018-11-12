@@ -13,7 +13,7 @@ const {
 
 const initialState = {
   isFetching: false,
-  lastFetchStatus: -1, // UN-FETCHED
+  // lastFetchStatus: -1, // UN-FETCHED
 };
 
 // TODO: remvoe before aftually demoing the app or deploying to a server
