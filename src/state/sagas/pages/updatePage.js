@@ -1,30 +1,33 @@
 import { takeLatest, put, call } from 'redux-saga/effects';
 import { actions, actionTypes } from '../../actions';
 import { transformDbPageToStorePage } from './helpers/transformDbPageToStorePage';
+import { transformStorePageToDbPage } from './helpers/transformStorePageToDbPage';
+
 import Api from '../../api';
 
 
 const {
-  CREATE_NEW_PAGE,
+  UPDATE_PAGE_DATA,
 } = actionTypes;
 
-function* postNewPage(action) {
+function* updatePage(action) {
   const { type, ...payload } = action;
 
+
   try {
-    const response = yield call(Api.createNewPage, payload);
+    const response = yield call(Api.updatePage, transformStorePageToDbPage( payload ));
 
     const { status, data: responseData } = response;
     const data = responseData[0];
     switch (status) {
       case 200:
-        yield put(actions.createNewPage.success({
+        yield put(actions.updatePageData.success({
           status,
           ...transformDbPageToStorePage( data ),
         }));
         break;
       default:
-        yield put(actions.createNewPage.failure({
+        yield put(actions.updatePageData.failure({
           status,
         }));
         break;
@@ -32,12 +35,12 @@ function* postNewPage(action) {
   }
   catch (error) {
     console.log('POST NEW PAGE ERROR: ', error);
-    yield put(actions.createNewPage.failure({
+    yield put(actions.updatePageData.failure({
       status: -1,
     }));
   }
 }
 
-export function* createNewPageWatcher() {
-  yield takeLatest(CREATE_NEW_PAGE, postNewPage);
+export function* updatePageWatcher() {
+  yield takeLatest(UPDATE_PAGE_DATA, updatePage);
 }

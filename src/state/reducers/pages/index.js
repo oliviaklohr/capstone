@@ -4,6 +4,7 @@ import { setPageDetails } from './setPageDetails';
 import { setActivePageId } from './setActivePageId';
 import { savePageData } from './savePageData';
 import { repeatReducerForArray } from '../_helpers/repeatReducerForArray';
+import { UPDATE_PAGE_DATA_SUCCESS, UPDATE_PAGE_DATA_FAILURE } from '../../actions/pages/updatePageData';
 
 const {
   CREATE_NEW_PAGE,
@@ -14,6 +15,7 @@ const {
   FETCH_PAGES_FOR_NOTEBOOK_FAILURE,
   SET_ACTIVE_PAGE_ID,
   SAVE_PAGE_DATA,
+  UPDATE_PAGE_DATA,
 } = actionTypes;
 
 const initialState = {
@@ -70,6 +72,26 @@ export const pages = (state = initialState, action = {}) => {
         lastFetchStatus: actionContents.status,
       };
 
+    case UPDATE_PAGE_DATA:
+      return {
+        ...state,
+        ...setPagesIsFetching( true ),
+      };
+    case UPDATE_PAGE_DATA_SUCCESS:
+      return {
+        ...state,
+        ...setPagesIsFetching( false ),
+        lastFetchStatus: actionContents.status,
+        byPageId: {
+          ...state.byPageId,
+          ...setPageDetails( actionContents ),
+        }
+      };
+    case UPDATE_PAGE_DATA_FAILURE:
+      return {
+        ...state,
+        ...setPagesIsFetching( false ),
+      };
 
     case SET_ACTIVE_PAGE_ID:
       return {

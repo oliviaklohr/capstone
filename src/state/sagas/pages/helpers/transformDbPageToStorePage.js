@@ -6,6 +6,7 @@ export const transformDbPageToStorePage = ({
   isdeleted,
   datecreated,
   lastedited,
+  props,
 }) => ({
   pageId: pageid,
   notebookId: notebookid,
@@ -14,4 +15,5 @@ export const transformDbPageToStorePage = ({
   isDeleted: isdeleted,
   dateCreated: datecreated,
   lastEdited: lastedited,
+  props,
 });

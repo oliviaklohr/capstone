@@ -42,10 +42,13 @@ function* getUserByEmail(action) {
           status
         }));
         break;
+      }
     }
-  }
-  catch (error) {
-    console.log('POST LOGIN USER ERROR: ', error);
+    catch (error) {
+      console.log('POST LOGIN USER ERROR: ', error);
+      yield put(actions.loginUser.failure({
+        status: -1,
+      }));
   }
 }
 

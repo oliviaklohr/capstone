@@ -20,7 +20,7 @@ const initialState = {
 const autoLoginInitialState = {
   isFetching: false,
   lastFetchStatus: 200,
-  userId: 2,
+  userId: 1,
   firstName: "dylan",
   lastName: "klohr",
   email: "dylan.klohr@gmail.com",

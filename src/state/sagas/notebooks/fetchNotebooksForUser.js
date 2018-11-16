@@ -30,6 +30,9 @@ function* fetchNotebooksForUser(action) {
   }
   catch (error) {
     console.log('FETCH NOTEBOOKS FOR USER ERROR: ', error);
+    yield put(actions.fetchNotebooksForUser.failure({
+      status: -1,
+    }));
   }
 }
 
