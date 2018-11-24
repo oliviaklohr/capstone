@@ -6,10 +6,10 @@ import { fetchNotebooksForUserWatcher } from './notebooks/fetchNotebooksForUser'
 import { createNewPageWatcher } from './pages/createNewPage';
 import { fetchPagesForNotebookWatcher } from './pages/fetchPagesForNotebook';
 import { updatePageWatcher } from './pages/updatePage';
+import { deletePageWatcher } from './pages/deletePage';
 
 
 export default function* rootSaga () {
-  // yield fork(<function>)
   yield fork(createNewUserWatcher);
   yield fork(loginUserWatcher);
   yield fork(createNewNotebookWatcher);
@@ -17,4 +17,5 @@ export default function* rootSaga () {
   yield fork(createNewPageWatcher);
   yield fork(fetchPagesForNotebookWatcher);
   yield fork(updatePageWatcher);
+  yield fork(deletePageWatcher);
 }

@@ -26,6 +26,8 @@ const propTypes = {
   setActiveNotebookId: PropTypes.func.isRequired,
   setActivePageId: PropTypes.func.isRequired,
   createNewPage: PropTypes.func.isRequired,
+  deletePage: PropTypes.func.isRequired,
+  clearPages: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
@@ -46,8 +48,10 @@ class Whiteboard extends Component {
     };
 
     this.onBackClick = this.onBackClick.bind(this);
+    this.onPageDeleteClick = this.onPageDeleteClick.bind(this);
     this.renderWhiteboardContent = this.renderWhiteboardContent.bind(this);
   }
+
   componentDidMount() {
     const { fetchPagesForNotebook, pageIds, page } = this.props;
     
@@ -56,19 +60,27 @@ class Whiteboard extends Component {
     }
   }
 
-  onBackClick() {
-    const { updatePage, setActiveNotebookId, setActivePageId } = this.props;
+  componentWillUnmount() {
+    const { updatePage, setActiveNotebookId, setActivePageId, clearPages } = this.props;
 
+    setActiveNotebookId({ notebookId: null });
+    setActivePageId({ pageId: null });
     updatePage();
+    clearPages();
+  }
+  
+  onBackClick() {
+    this.setState({ willBackRedirect: true });
+  }
 
-    this.setState({ willBackRedirect: true }, () => {
-      setActiveNotebookId({ notebookId: null });
-      setActivePageId({ pageId: null });
-    });
+  onPageDeleteClick() {
+    const { deletePage, page } = this.props;
+    
+    deletePage({ pageId: page.pageId });
   }
 
   renderWhiteboardContent() {
-    const { createNewPage, menubarProps, canvasProps, page, pageIds, setActivePageId } = this.props;
+    const { createNewPage, menubarProps, canvasProps, page, pageIds, setActivePageId, updatePage } = this.props;
 
     const canRender = !!(page) && !!(pageIds);
 
@@ -77,9 +89,21 @@ class Whiteboard extends Component {
     const displayedIndex = pageIds.indexOf(page.pageId);
     const totalPages = pageIds.length;
 
+    const onPrevClick = () => {
+      updatePage();
+      setActivePageId({ pageId: pageIds[displayedIndex - 1] });
+    };
+
+    const onNextClick = () => {
+      updatePage();
+      setActivePageId({ pageId: pageIds[displayedIndex + 1]});
+    };
+    
+
     return  (
         <Fragment>
           <MenuBar
+            onSettingsClick={this.onPageDeleteClick}
             onBackClick={this.onBackClick}
             onMenuClick={createNewPage}
             {...menubarProps}
@@ -91,8 +115,8 @@ class Whiteboard extends Component {
             <Paginator
               displayedIndex={displayedIndex + 1}
               totalPages={totalPages}
-              onPrevClick={() => setActivePageId({ pageId: pageIds[displayedIndex - 1]})}
-              onNextClick={() => setActivePageId({ pageId: pageIds[displayedIndex + 1]})}
+              onPrevClick={onPrevClick}
+              onNextClick={onNextClick}
             />
           </div>
         </Fragment>
@@ -101,12 +125,9 @@ class Whiteboard extends Component {
 
   render() {
     const {
-      createNewPage,
       page,
       pageIds,
       isLoading,
-      menubarProps,
-      canvasProps,
       setActivePageId,
     } = this.props;
 
