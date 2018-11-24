@@ -2,7 +2,6 @@ export const CREATE_NEW_PAGE = 'PAGES / CREATE NEW';
 export const CREATE_NEW_PAGE_SUCCESS = 'PAGES / CREATE NEW SUCCESS';
 export const CREATE_NEW_PAGE_FAILURE = 'PAGES / CREATE NEW FAILURE';
 
-// TODO: ensure that we're sending a REAL user-id
 const createNewPage = ({
   userId,
   notebookId,
@@ -36,7 +35,7 @@ const success = ({
 
 const failure = ({ status }) => ({
   type: CREATE_NEW_PAGE_FAILURE,
-  lastFetchStatus: status,
+  status,
 });
 
 createNewPage.success = success;

@@ -2,7 +2,7 @@ import { actionTypes } from '../../actions';
 import { setNotebooksIsFetching } from './setNotebooksIsFetching';
 import { setNotebookDetails } from './setNotebookDetails';
 import { setActiveNotebookId } from './setActiveNotebookId';
-import { repeatReducerForArray } from '../_helpers/repeatReducerForArray';
+import { repeatReducerForArray } from '../helpers/repeatReducerForArray';
 
 
 const {

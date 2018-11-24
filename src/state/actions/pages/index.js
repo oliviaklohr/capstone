@@ -29,12 +29,26 @@ import {
   UPDATE_PAGE_DATA_FAILURE,
 } from './updatePageData';
 
+import {
+  deletePage,
+  DELETE_PAGE,
+  DELETE_PAGE_SUCCESS,
+  DELETE_PAGE_FAILURE,
+} from './deletePage';
+
+import {
+  clearPages,
+  CLEAR_PAGES
+} from './clearPages';
+
 export const pagesActions = {
   createNewPage,
   fetchPagesForNotebook,
   setActivePageId,
   savePageData,
   updatePageData,
+  deletePage,
+  clearPages,
 };
 
 export const pagesActionTypes = {
@@ -49,4 +63,8 @@ export const pagesActionTypes = {
   UPDATE_PAGE_DATA,
   UPDATE_PAGE_DATA_SUCCESS,
   UPDATE_PAGE_DATA_FAILURE,
+  DELETE_PAGE,
+  DELETE_PAGE_SUCCESS,
+  DELETE_PAGE_FAILURE,
+  CLEAR_PAGES,
 };
