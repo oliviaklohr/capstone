@@ -6,6 +6,7 @@ export const UPDATE_PAGE_DATA_FAILURE = 'PAGES / UPDATE PAGE DATA FAILURE';
 
 const updatePageData = ({
   pageId,
+  
   ...pageData,
 }) => ({
   type: UPDATE_PAGE_DATA,
