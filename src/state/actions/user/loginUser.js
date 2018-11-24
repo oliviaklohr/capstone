@@ -22,7 +22,7 @@ const success = ({
   password,
 }) => ({
   type: LOGIN_USER_SUCCESS,
-  lastFetchStatus: status,
+  status,
   userId,
   firstName,
   lastName,
