@@ -29,7 +29,9 @@ const autoLoginInitialState = {
   password: "password",
 };
 
-export const user = (state = autoLoginInitialState, action = {}) => {
+const autoLogin = false;
+
+export const user = (state = autoLogin ? autoLoginInitialState: initialState, action = {}) => {
   const { type, ...actionContents } = action;
 
   switch (type) {
