@@ -17,10 +17,18 @@ import {
   SET_ACTIVE_NOTEBOOK_ID,
 } from './setActiveNotebookId';
 
+import {
+  deleteNotebook,
+  DELETE_NOTEBOOK,
+  DELETE_NOTEBOOK_SUCCESS,
+  DELETE_NOTEBOOK_FAILURE,
+} from './deleteNotebook';
+
 export const notebooksActions = {
   createNewNotebook,
   fetchNotebooksForUser,
   setActiveNotebookId,
+  deleteNotebook,
 };
 
 export const notebooksActionTypes = {
@@ -31,4 +39,7 @@ export const notebooksActionTypes = {
   FETCH_NOTEBOOKS_FOR_USER_SUCCESS,
   FETCH_NOTEBOOKS_FOR_USER_FAILURE,
   SET_ACTIVE_NOTEBOOK_ID,
+  DELETE_NOTEBOOK,
+  DELETE_NOTEBOOK_SUCCESS,
+  DELETE_NOTEBOOK_FAILURE,
 };

@@ -16,7 +16,7 @@ const cx = classNames.bind(styles);
 
 const propTypes = {
   categories: PropTypes.array,
-  onCreateNewNotebook: PropTypes.func.isRequired,
+  onCreateNotebook: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
