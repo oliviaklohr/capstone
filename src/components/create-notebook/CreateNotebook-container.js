@@ -15,8 +15,6 @@ const mapStateToProps = ({ notebooks, user }, ownProps) => {
   return {
     userId,
     categories,
-    // TODO: note, this will need to be moved down to `mapDispatchToProps` when an action is created
-    // onCreateNewNotebook: (fields) => console.log('new notebook fields:', fields),
   };
 };
 

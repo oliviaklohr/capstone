@@ -11,7 +11,7 @@ import CreateCategory from '../../components/create-notebook/create-category/Cre
 import WidthConstraint from '../../components/width-constraints/WidthConstraints';
 import { WHITEBOARD } from '../../utils/routes';
 
-import styles from './Notebook.module.css';
+import styles from './Notebooks.module.css';
 
 const cx = classNames.bind(styles);
 
@@ -102,10 +102,15 @@ class Notebooks extends Component {
         <NotebookMenuBar
           onCreateNewCategory={createNewCategory}
           onCreateNewNotebook={createNewNotebook} 
-        />
+          />
         <div className={cx('page-wrapper-positioner')}>
           <PageWrapper isLoading={isLoading}>
-            <CategoryMapper notebooks={notebooks} additionalCategories={newCategories} />
+            <CategoryMapper
+              onCreateNewCategory={createNewCategory}
+              isLoading={isLoading}
+              notebooks={notebooks}
+              additionalCategories={newCategories}
+            />
             <Modal open={notebookCreationModalOpen} onClose={() => this.closeModal('notebook')}>
               <div style={modalPosition}>
                 <WidthConstraint.NewEntity>

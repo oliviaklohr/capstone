@@ -1,5 +1,12 @@
 .notebook {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
   padding: 20px;
+}
+
+.notebook-contents {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;

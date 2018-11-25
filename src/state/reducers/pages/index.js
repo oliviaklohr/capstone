@@ -112,7 +112,7 @@ export const pages = (state = initialState, action = {}) => {
         ...setPagesIsFetching( true ),
       };
     case DELETE_PAGE_SUCCESS:
-      const returnObj = {
+      return {
         ...state,
         ...setPagesIsFetching( false ),
         lastFetchStatus: actionContents.status,
@@ -120,8 +120,6 @@ export const pages = (state = initialState, action = {}) => {
           ...deletePageFromStore( state.byPageId, actionContents ),
         },
       };
-
-      return returnObj;
     case DELETE_PAGE_FAILURE:
       return {
         ...state,

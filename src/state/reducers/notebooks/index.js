@@ -2,6 +2,7 @@ import { actionTypes } from '../../actions';
 import { setNotebooksIsFetching } from './setNotebooksIsFetching';
 import { setNotebookDetails } from './setNotebookDetails';
 import { setActiveNotebookId } from './setActiveNotebookId';
+import { deleteNotebookFromStore } from './deleteNotebookFromStore';
 import { repeatReducerForArray } from '../helpers/repeatReducerForArray';
 
 
@@ -9,9 +10,15 @@ const {
   CREATE_NEW_NOTEBOOK,
   CREATE_NEW_NOTEBOOK_SUCCESS,
   CREATE_NEW_NOTEBOOK_FAILURE,
+
   FETCH_NOTEBOOKS_FOR_USER,
   FETCH_NOTEBOOKS_FOR_USER_SUCCESS,
   FETCH_NOTEBOOKS_FOR_USER_FAILURE,
+
+  DELETE_NOTEBOOK,
+  DELETE_NOTEBOOK_SUCCESS,
+  DELETE_NOTEBOOK_FAILURE,
+
   SET_ACTIVE_NOTEBOOK_ID,
 } = actionTypes;
 
@@ -65,6 +72,28 @@ export const notebooks = (state = initialState, action = {}) => {
         },
       };
     case FETCH_NOTEBOOKS_FOR_USER_FAILURE:
+      return {
+        ...state,
+        ...setNotebooksIsFetching( false ),
+        lastFetchStatus: actionContents.status,
+      };
+
+
+    case DELETE_NOTEBOOK:
+      return {
+        ...state,
+        ...setNotebooksIsFetching( true ),
+      };
+    case DELETE_NOTEBOOK_SUCCESS:
+      return {
+        ...state,
+        ...setNotebooksIsFetching( false ),
+        lastFetchStatus: actionContents.status,
+        byNotebookId: {
+          ...deleteNotebookFromStore( state.byNotebookId, actionContents ),
+        },
+      };
+    case DELETE_NOTEBOOK_FAILURE:
       return {
         ...state,
         ...setNotebooksIsFetching( false ),

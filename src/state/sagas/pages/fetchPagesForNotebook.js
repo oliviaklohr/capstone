@@ -8,7 +8,7 @@ const {
 } = actionTypes;
 
 function* fetchPagesForNotebook(action) {
-  const { type, userId, notebookId } = action;
+  const { type, userId, notebookId } = action; // eslint-disable-line no-unused-vars
 
   try {
     let response = yield call(Api.fetchPagesForNotebook, { notebookid: notebookId });
