@@ -7,6 +7,7 @@ import { createNewPageWatcher } from './pages/createNewPage';
 import { fetchPagesForNotebookWatcher } from './pages/fetchPagesForNotebook';
 import { updatePageWatcher } from './pages/updatePage';
 import { deletePageWatcher } from './pages/deletePage';
+import { deleteNotebookWatcher } from './notebooks/deleteNotebook';
 
 
 export default function* rootSaga () {
@@ -18,4 +19,5 @@ export default function* rootSaga () {
   yield fork(fetchPagesForNotebookWatcher);
   yield fork(updatePageWatcher);
   yield fork(deletePageWatcher);
+  yield fork(deleteNotebookWatcher);
 }
