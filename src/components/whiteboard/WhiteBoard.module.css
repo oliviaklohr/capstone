@@ -4,3 +4,12 @@
   left: 0;
   right: 0;
 }
+
+.no-pages-warning-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+}

@@ -1,6 +1,8 @@
 export const deletePageFromStore = (prevByPageId, { pageId }) => {
+
+  const keyToRemove = pageId.toString();
   const {
-    [pageId]: _omit,
+    [keyToRemove]: _omit,
     ...byPageId
   } = prevByPageId;
 
