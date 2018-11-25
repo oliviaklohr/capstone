@@ -90,7 +90,6 @@ export const pages = (state = initialState, action = {}) => {
         ...setPagesIsFetching( true ),
       };
     case UPDATE_PAGE_DATA_SUCCESS:
-      debugger;
       return {
         ...state,
         ...setPagesIsFetching( false ),

@@ -15,7 +15,9 @@ function* fetchPagesForNotebook(action) {
 
     const { status, data } = response;
 
-    if (status === 200 && data.length === 0) {
+    const renderablePages = data.filter(({ isdeleted }) => !isdeleted );
+
+    if (status === 200 && renderablePages.length === 0) {
       yield put(actions.createNewPage({ userId, notebookId }));
     }
     else {
