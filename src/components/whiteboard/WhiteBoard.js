@@ -3,7 +3,11 @@ import { Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import shortid from 'shortid';
 import MenuBar from '../menubar/MenuBar';
+import IconButton from '@material-ui/core/IconButton/IconButton';
+import Icon from '@mdi/react';
+import { mdiPlus } from '@mdi/js';
 import Canvas from '../canvas/Canvas-container';
 import Paginator from '../paginator/Paginator';
 import { NOTEBOOKS } from '../../utils/routes';
@@ -84,43 +88,49 @@ class Whiteboard extends Component {
 
     const canRender = !!(page) && !!(pageIds);
 
-    if (!canRender) { return null; }
+    const noPageColor = '#bdbdbd';
 
-    const displayedIndex = pageIds.indexOf(page.pageId);
-    const totalPages = pageIds.length;
-
-    const onPrevClick = () => {
-      updatePage();
-      setActivePageId({ pageId: pageIds[displayedIndex - 1] });
-    };
-
-    const onNextClick = () => {
-      updatePage();
-      setActivePageId({ pageId: pageIds[displayedIndex + 1]});
-    };
-    
+    const whiteboardBody = canRender
+      ? ( <Canvas lineWidth={3} page={page} penColor='red' {...canvasProps} /> )
+      : (
+        <div className={cx('no-pages-warning-container')}>
+          <h2 style={{ color: noPageColor }}>No Pages in Notebook</h2>
+          <IconButton key={shortid.generate()} onClick={createNewPage}>
+            <Icon path={mdiPlus} size={1} color={noPageColor} />
+          </IconButton>
+        </div>
+      );
+    const paginator = canRender
+      ? (
+        <div className={cx('paginator')}>
+          <Paginator
+            displayedIndex={pageIds.indexOf(page.pageId) + 1}
+            totalPages={pageIds.length}
+            onPrevClick={() => {
+              updatePage();
+              setActivePageId({ pageId: pageIds[pageIds.indexOf(page.pageId) - 1] });
+            }}
+            onNextClick={() => {
+              updatePage();
+              setActivePageId({ pageId: pageIds[pageIds.indexOf(page.pageId) + 1]});
+            }}
+          />
+        </div>
+      )
+      : null;
 
     return  (
-        <Fragment>
-          <MenuBar
-            onSettingsClick={this.onPageDeleteClick}
-            onBackClick={this.onBackClick}
-            onMenuClick={createNewPage}
-            {...menubarProps}
-            />
-          { page && 
-            <Canvas lineWidth={3} page={page} penColor='red' {...canvasProps} />
-          }
-          <div className={cx('paginator')}>
-            <Paginator
-              displayedIndex={displayedIndex + 1}
-              totalPages={totalPages}
-              onPrevClick={onPrevClick}
-              onNextClick={onNextClick}
-            />
-          </div>
-        </Fragment>
-      );
+      <Fragment>
+        <MenuBar
+          onSettingsClick={this.onPageDeleteClick}
+          onBackClick={this.onBackClick}
+          onMenuClick={createNewPage}
+          {...menubarProps}
+        />
+        {whiteboardBody}
+        {paginator}
+      </Fragment>
+    );
   }
 
   render() {
@@ -134,8 +144,7 @@ class Whiteboard extends Component {
     const { willBackRedirect } = this.state;
     
     const loadingSpinner = ( <CircularProgress size={100} /> );
-
-    const shouldDisplayLoadingSpinner = isLoading || !pageIds || !page;
+    const shouldDisplayLoadingSpinner = isLoading;
 
     const content = shouldDisplayLoadingSpinner
       ? loadingSpinner
