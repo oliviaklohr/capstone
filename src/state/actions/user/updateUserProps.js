@@ -14,11 +14,9 @@ const updateUserProps = ({
 };
 
 const success = ({
-  status,
   ...others
 }) => ({
   type: UPDATE_USER_PROPS_SUCCESS,
-  status,
   ...others,
 });
 
