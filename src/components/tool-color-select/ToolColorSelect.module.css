@@ -1,0 +1,11 @@
+.pen-select {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  padding: 20px;
+}
+
+.add-color-button {
+  align-self: flex-end;
+}

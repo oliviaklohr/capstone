@@ -10,7 +10,7 @@ export const store = createStore(
   rootReducer,
   compose(
     applyMiddleware(sagaMiddleware, logger),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), // IGNORE THIS, this is just addef for configuration to allow us to use the redux dev tools nativley in our browser
+    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), // IGNORE THIS, this is just addef for configuration to allow us to use the redux dev tools nativley in our browser
   ),
 );
 

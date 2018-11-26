@@ -131,7 +131,7 @@ class CreateNotebook extends Component {
                 onColorSelection={this.handleSelectedColorChange}
                 colorOptionIcon="BookOutlined"
                 colors={NOTEBOOK_COLORS}
-                />
+              />
             </div>
           </div>
           <div className={cx('create-notebook-button')}>

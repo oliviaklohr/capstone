@@ -9,11 +9,32 @@ const mapStateToProps = ({ user, notebooks, pages }) => {
     userId: user.userId,
   };
 
+  let lineWidth;
+  let lineColor;
+  
+  const activeTool = user.props.activeTool;
+  
+  if (activeTool === 'pen') {
+    lineWidth = user.props.penLineWidth;
+    lineColor = user.props.activePenColor;
+  }
+  else if (activeTool === 'highlighter') {
+    lineWidth = user.props.highlighterLineWidth;
+    lineColor = user.props.activeHighlighterColor;
+  }
+  else {
+    lineWidth = 15;
+    lineColor = 'rgb(255, 255, 255)';
+  }
+  
   return {
     ...propsNeededForMerge,
     pageIds: Object.keys(pages.byPageId).length > 0 ? Object.keys(pages.byPageId).map((num) => parseInt(num) ): null,
     page: pages.byPageId[ pages.activePageId ],
     isLoading: pages.isFetching,
+    lineColor,
+    lineWidth,
+    userProps: user.props,
   };
 };
 
@@ -22,7 +43,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mergeProps = (propsFromState, propsFromDispatch) => {
-  const { notebookId, userId, page, pageIds, ...otherPropsFromState } = propsFromState;
+  const { notebookId, userId, page, pageIds, userProps, ...otherPropsFromState } = propsFromState;
   const { dispatch, ...otherPropsFromDispatch } = propsFromDispatch;
 
   const deletePage = ({ pageId }) => {
@@ -43,8 +64,20 @@ const mergeProps = (propsFromState, propsFromDispatch) => {
     dispatch(actions.deletePage({ pageId }))
   };
 
+  const setActiveTool = ({ tool }) => dispatch(actions.updateUserProps({
+    userId,
+    props: {
+      ...userProps,
+      activeTool: tool,
+    },
+  }));
+
   const fetchPagesForNotebook = () => dispatch(actions.fetchPagesForNotebook({ userId, notebookId }));
-  const updatePage = () => dispatch(actions.updatePageData(page));
+  const updatePage = () => {
+    if (page) {
+      dispatch(actions.updatePageData(page));
+    }
+  };
   const setActivePageId = (args) => dispatch(actions.setActivePageId(args))
   const createNewPage = () => dispatch(actions.createNewPage({ userId, notebookId }));
   const setActiveNotebookId = (args) => dispatch(actions.setActiveNotebookId(args));
@@ -62,6 +95,7 @@ const mergeProps = (propsFromState, propsFromDispatch) => {
     createNewPage,
     deletePage,
     clearPages,
+    setActiveTool,
   };
 };
 
