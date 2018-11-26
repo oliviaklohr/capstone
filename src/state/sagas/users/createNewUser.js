@@ -1,6 +1,7 @@
 import { takeLatest, put, call } from 'redux-saga/effects';
 import { actions, actionTypes } from '../../actions';
 import Api from '../../api';
+import { transformDbUserToStoreUser } from './helpers/transformDbUserToStoreUser';
 
 const {
   CREATE_NEW_USER,
@@ -18,13 +19,7 @@ function* postNewUser(action) {
       case 200:
         yield put(actions.createNewUser.success({
           status,
-          userId: data.userid,
-          firstName: data.firstname,
-          lastName: data.lastname,
-          email: data.email,
-          dateCreated: data.datecreated,
-          isDeleted: data.isdeleted,
-          password: data.props.password,
+          ...transformDbUserToStoreUser( data ),
         }));
         break;
       default:

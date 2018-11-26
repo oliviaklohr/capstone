@@ -16,7 +16,6 @@ function* deleteNotebook(action) {
     const { status, data: responseData } = response;
     const data = responseData.row;
 
-    debugger;
     switch (status) {
       case 200:
         yield put(actions.deleteNotebook.success({

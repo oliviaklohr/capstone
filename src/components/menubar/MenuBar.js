@@ -10,7 +10,7 @@ const cx = classNames.bind(styles);
 const propTypes = {
   onBackClick: PropTypes.func,
   onMenuClick: PropTypes.func,
-  onBrushClick: PropTypes.func,
+  onPenClick: PropTypes.func,
   onHighlighterClick: PropTypes.func,
   onEraserClick: PropTypes.func,
   onSettingsClick: PropTypes.func,
@@ -20,7 +20,7 @@ const propTypes = {
 const defaultProps = {
   onBackClick: () => window.alert('you have clicked the BACK item!'),
   onMenuClick: () => window.alert('you have clicked the MENU item!'),
-  onBrushClick: () => window.alert('you have clicked the BRUSH item!'),
+  onPenClick: () => window.alert('you have clicked the PEN item!'),
   onHighlighterClick: () => window.alert('you have clicked the HIGHLIGHTER item!'),
   onEraserClick: () => window.alert('you have clicked the ERASER item!'),
   onSettingsClick: () => window.alert('you have clicked the SETTINGS item!'),
@@ -30,7 +30,7 @@ const defaultProps = {
 const Menubar = ({
   onBackClick,
   onMenuClick,
-  onBrushClick,
+  onPenClick,
   onHighlighterClick,
   onEraserClick,
   onSettingsClick,
@@ -53,7 +53,7 @@ const Menubar = ({
     {
       iconName: 'Pen',
       isDisabled: false,
-      onClick: onBrushClick,
+      onClick: onPenClick,
     },
     {
       iconName: 'Marker',

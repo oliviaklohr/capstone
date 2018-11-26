@@ -1,5 +1,6 @@
 import { takeLatest, put, call } from 'redux-saga/effects';
 import { actions, actionTypes } from '../../actions';
+import { transformDbUserToStoreUser } from './helpers/transformDbUserToStoreUser';
 import Api from '../../api';
 
 const {
@@ -23,16 +24,9 @@ function* getUserByEmail(action) {
     switch (status) {
       case 200:
         // TODO: ensure that noah is able to fix the database such that we will ONLY receive a 200 error if we have a user that is getting returned
-
         const actionToDispatch = actions.loginUser.success({
           status,
-          userId: data.userid || 'FALLBACK: userId',
-          firstName: data.firstname || 'FALLBACK: firstName',
-          lastName: data.lastname || 'FALLBACK: lastName',
-          email: data.email || 'FALLBACK: email',
-          dateCreated: data.datecreated || 'FALLBACK: dateCreated',
-          isDeleted: data.isdeleted,
-          password: data.props.password || 'FALLBACK: password',
+          ...transformDbUserToStoreUser( data ),
         });
         
         yield put(actionToDispatch);

@@ -85,8 +85,6 @@ const CategoryMapper = ({ notebooks, additionalCategories, isLoading, onCreateNe
         </div>
     );
 
-  debugger;
-
   return(
     <div className={cx('category-mapper')}>
       {content}
