@@ -126,7 +126,6 @@ export const user = (state = autoLogin ? autoLoginInitialState: initialState, ac
       return {
         ...state,
         ...setUserIsFetching( false ),
-        lastFetchStatus: actionContents.status,
         props: actionContents.props, // TODO: NOTE: this is NOT a permanent method for doing this, first we need to be `PUT`ing to the DB.
       };
     // TODO: after it is determined how to `PUT` to `user.props`, this can be uncommented and we can revert back to updating the store first
