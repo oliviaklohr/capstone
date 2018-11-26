@@ -106,7 +106,9 @@ class Whiteboard extends Component {
   onPageDeleteClick() {
     const { deletePage, page } = this.props;
     
-    deletePage({ pageId: page.pageId });
+    if (page && page.pageId) {
+      deletePage({ pageId: page.pageId });
+    }
   }
 
   onPenClick() {
