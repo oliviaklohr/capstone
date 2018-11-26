@@ -20,6 +20,7 @@ const success = ({
   dateCreated,
   isDeleted,
   password,
+  props,
 }) => ({
   type: LOGIN_USER_SUCCESS,
   status,
@@ -30,6 +31,7 @@ const success = ({
   dateCreated,
   isDeleted,
   password,
+  props,
 });
 
 const failure = ({ status }) => ({

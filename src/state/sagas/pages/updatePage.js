@@ -13,7 +13,6 @@ const {
 function* updatePage(action) {
   const { type, ...payload } = action;
 
-
   try {
     const response = yield call(Api.updatePage, transformStorePageToDbPage( payload ));
 
@@ -34,7 +33,7 @@ function* updatePage(action) {
     }
   }
   catch (error) {
-    console.log('POST NEW PAGE ERROR: ', error);
+    console.log('POST UPDATE PAGE ERROR: ', error);
     yield put(actions.updatePageData.failure({
       status: -1,
     }));

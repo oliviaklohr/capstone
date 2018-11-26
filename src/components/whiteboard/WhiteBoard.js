@@ -4,12 +4,16 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import shortid from 'shortid';
-import MenuBar from '../menubar/MenuBar';
 import IconButton from '@material-ui/core/IconButton/IconButton';
 import Icon from '@mdi/react';
 import { mdiPlus } from '@mdi/js';
+import Modal from '@material-ui/core/Modal';
+import MenuBar from '../menubar/MenuBar';
 import Canvas from '../canvas/Canvas-container';
 import Paginator from '../paginator/Paginator';
+import PenColorSelect from '../pen-color-select/PenColorSelect';
+import HighlighterColorSelect from '../highlighter-color-select/HighlighterColorSelect';
+import WidthConstraint from '../width-constraints/WidthConstraints';
 import { NOTEBOOKS } from '../../utils/routes';
 
 import styles from './WhiteBoard.module.css';
@@ -32,6 +36,9 @@ const propTypes = {
   createNewPage: PropTypes.func.isRequired,
   deletePage: PropTypes.func.isRequired,
   clearPages: PropTypes.func.isRequired,
+  penColor: PropTypes.string.isRequired,
+  lineWidth: PropTypes.number.isRequired,
+  setActiveTool: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
@@ -49,9 +56,16 @@ class Whiteboard extends Component {
 
     this.state = {
       willBackRedirect: false,
+      penColorChooserModalOpen: false,
+      highlighterColorChooserModalOpen: false,
     };
 
+    this.onPenClick = this.onPenClick.bind(this);
+    this.onHighlighterClick = this.onHighlighterClick.bind(this);
+    this.onEraserClick = this.onEraserClick.bind(this);
     this.onBackClick = this.onBackClick.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
     this.onPageDeleteClick = this.onPageDeleteClick.bind(this);
     this.renderWhiteboardContent = this.renderWhiteboardContent.bind(this);
   }
@@ -72,6 +86,18 @@ class Whiteboard extends Component {
     updatePage();
     clearPages();
   }
+
+  openModal(dialog) {
+    this.setState({
+      [`${dialog}ColorChooserModalOpen`]: true,
+    });
+  }
+  
+  closeModal(dialog) {
+    this.setState({
+      [`${dialog}ColorChooserModalOpen`]: false,
+    });
+  }
   
   onBackClick() {
     this.setState({ willBackRedirect: true });
@@ -83,15 +109,46 @@ class Whiteboard extends Component {
     deletePage({ pageId: page.pageId });
   }
 
+  onPenClick() {
+    const { setActiveTool } = this.props;
+
+    setActiveTool({ tool: 'pen'});
+    this.openModal('pen')
+  };
+
+  onHighlighterClick() {
+    const { setActiveTool } = this.props;
+
+    setActiveTool({ tool: 'highlighter'});
+    this.openModal('highlighter')
+  };
+
+  onEraserClick() {
+    const { setActiveTool } = this.props;
+
+    setActiveTool({ tool: 'eraser' });
+  }
+
   renderWhiteboardContent() {
-    const { createNewPage, menubarProps, canvasProps, page, pageIds, setActivePageId, updatePage } = this.props;
+    const {
+      createNewPage,
+      menubarProps,
+      canvasProps,
+      page,
+      pageIds,
+      setActivePageId,
+      updatePage,
+      lineColor,
+      lineWidth,
+    } = this.props;
+    const { penColorChooserModalOpen, highlighterColorChooserModalOpen } = this.state;
 
     const canRender = !!(page) && !!(pageIds);
 
     const noPageColor = '#bdbdbd';
 
     const whiteboardBody = canRender
-      ? ( <Canvas lineWidth={3} page={page} penColor='red' {...canvasProps} /> )
+      ? ( <Canvas lineWidth={lineWidth} page={page} penColor={lineColor} {...canvasProps} /> )
       : (
         <div className={cx('no-pages-warning-container')}>
           <h2 style={{ color: noPageColor }}>No Pages in Notebook</h2>
@@ -119,12 +176,39 @@ class Whiteboard extends Component {
       )
       : null;
 
+    const top = '50%';
+    const left = '50%';
+    
+    const penColorModalPosition = {
+      position: 'absolute',
+      top,
+      left,
+      transform: `translate(-${top}, -${left})`,
+    };
+
     return  (
       <Fragment>
+        <Modal open={penColorChooserModalOpen} onClose={() => this.closeModal('pen')}>
+          <div style={penColorModalPosition}>
+            <WidthConstraint.ToolColorSelect>
+              <PenColorSelect onColorSelect={() => this.closeModal('pen')} />
+            </WidthConstraint.ToolColorSelect>
+          </div>
+        </Modal>
+        <Modal open={highlighterColorChooserModalOpen} onClose={() => this.closeModal('highlighter')}>
+          <div style={penColorModalPosition}>
+            <WidthConstraint.ToolColorSelect>
+              <HighlighterColorSelect onColorSelect={() => this.closeModal('highlighter')} />
+            </WidthConstraint.ToolColorSelect>
+          </div>
+        </Modal>
         <MenuBar
           onSettingsClick={this.onPageDeleteClick}
           onBackClick={this.onBackClick}
           onMenuClick={createNewPage}
+          onPenClick={this.onPenClick}
+          onEraserClick={this.onEraserClick}
+          onHighlighterClick={this.onHighlighterClick}
           {...menubarProps}
         />
         {whiteboardBody}

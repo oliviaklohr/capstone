@@ -12,11 +12,13 @@ const propTypes = {
   /** callback triggered on a color selected */
   onColorSelection: PropTypes.func,
   colorOptionIcon: PropTypes.string,
+  initiallyActiveColor: PropTypes.string,
 };
 
 const defaultProps = {
   onColorSelection: null,
   colorOptionIcon: undefined,
+  initiallyActiveColor: undefined,
 };
 
 class ColorChooser extends Component {
@@ -24,7 +26,7 @@ class ColorChooser extends Component {
     super(props);
 
     this.state = {
-      selectedColor: '',
+      selectedColor: props.initiallyActiveColor || '',
     };
 
     this.handleOnClick = this.handleOnClick.bind(this);

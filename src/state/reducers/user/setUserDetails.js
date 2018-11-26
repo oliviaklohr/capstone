@@ -7,6 +7,7 @@ export const setUserDetails = ({
   dateCreated,
   isDeleted,
   password,
+  props,
 }) => !isDeleted
   ? ({
     lastFetchStatus: status,
@@ -17,5 +18,6 @@ export const setUserDetails = ({
     dateCreated,
     isDeleted,
     password,
+    props,
   })
   : {};
