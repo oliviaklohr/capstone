@@ -17,19 +17,28 @@ function* getUserByEmail(action) {
 
     if ( !response.data.length ) {
       console.log('LOGIN USER ERROR: no user found by that email');
+
+      yield put(actions.loginUser.failure({
+        status: -1,
+      }));
       return;
     }
 
     const data = responseData[0];
     switch (status) {
       case 200:
-        // TODO: ensure that noah is able to fix the database such that we will ONLY receive a 200 error if we have a user that is getting returned
-        const actionToDispatch = actions.loginUser.success({
-          status,
-          ...transformDbUserToStoreUser( data ),
-        });
-        
-        yield put(actionToDispatch);
+        if (action.password !== data.props.password) {
+          yield put(actions.loginUser.failure({
+            status: -1,
+          }));
+        }
+        else {
+          // TODO: ensure that noah is able to fix the database such that we will ONLY receive a 200 status if we have a user that is getting returned
+          yield put(actions.loginUser.success({
+            status,
+            ...transformDbUserToStoreUser( data ),
+          }));
+        } 
         break;
       default:
         yield put(actions.loginUser.failure({

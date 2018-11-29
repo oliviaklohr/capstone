@@ -18,12 +18,18 @@ const mergeProps = (propsFromState, propsFromDispatch) => {
   const { dispatch, ...otherPropsFromDispatch } = propsFromDispatch;
 
   const fetchNotebooksForUser = () => dispatch(actions.fetchNotebooksForUser({ userId }));
+
+  const deleteUser = () => dispatch(actions.deleteUser({ userId }));
+
+  const logoutUser = () => dispatch(actions.logoutUser());
   
   return {
     ...otherPropsFromState,
     ...otherPropsFromDispatch,
     userId,
     fetchNotebooksForUser,
+    deleteUser,
+    logoutUser,
   }
 };
 

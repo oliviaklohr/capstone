@@ -36,7 +36,7 @@ const success = ({
 
 const failure = ({ status }) => ({
   type: LOGIN_USER_FAILURE,
-  lastFetchStatus: status,
+  status,
 });
 
 loginUser.success = success;

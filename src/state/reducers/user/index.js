@@ -11,11 +11,15 @@ const {
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAILURE,
   
-
   UPDATE_USER_PROPS,
   UPDATE_USER_PROPS_SUCCESS,
   UPDATE_USER_PROPS_FAILURE,
   
+  DELETE_USER,
+  DELETE_USER_SUCCESS,
+  DELETE_USER_FAILURE,
+
+  LOGOUT_USER,
 } = actionTypes;
 
 const initialState = {
@@ -120,6 +124,28 @@ export const user = (state = autoLogin ? autoLoginInitialState: initialState, ac
         ...state,
         ...setUserIsFetching( false ),
         lastFetchStatus: actionContents.status,
+      };
+
+
+    case DELETE_USER:
+      return {
+        ...state,
+        ...setUserIsFetching( true ),
+      };
+    case DELETE_USER_SUCCESS:
+      return {
+        ...setUserIsFetching( false ),
+      };
+    case DELETE_USER_FAILURE:
+      return {
+        ...state,
+        ...setUserIsFetching( false ),
+        lastFetchStatus: actionContents.status,
+      };
+
+    case LOGOUT_USER:
+      return  {
+        isFetching: false,
       };
       
     case UPDATE_USER_PROPS:
