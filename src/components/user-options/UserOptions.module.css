@@ -1,0 +1,11 @@
+.user-options {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  padding: 20px;
+  align-items: center;
+}
+
+.delete-margin {
+  margin-top: 10px;
+}

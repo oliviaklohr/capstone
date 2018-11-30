@@ -11,11 +11,13 @@ const cx = classNames.bind(styles);
 const propTypes = {
   onCreateNewCategory: PropTypes.func.isRequired,
   onCreateNewNotebook: PropTypes.func.isRequired,
+  onProfileClick: PropTypes.func.isRequired,
 };
 
 const NotebookMenuBar = ({
   onCreateNewCategory,
   onCreateNewNotebook,
+  onProfileClick,
 }) => {
   const leftCommandPaletteItems = [
     {
@@ -49,7 +51,7 @@ const NotebookMenuBar = ({
     {
       iconName: 'AccountOutline',
       isDisabled: false,
-      onClick: () => window.alert('you have clicked the PROFILE item!'),
+      onClick: onProfileClick,
     },
   ]
 

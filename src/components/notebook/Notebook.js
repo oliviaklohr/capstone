@@ -68,7 +68,7 @@ const Notebook = ({
       </Card>
     </div>
   );
-};
+}
 
 Notebook.propTypes = propTypes;
 Notebook.defaultProps = defaultProps;
