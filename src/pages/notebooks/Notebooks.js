@@ -2,12 +2,13 @@ import React, { Component, Fragment } from 'react';
 import { Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
+import Modal from '@material-ui/core/Modal';
 import PageWrapper from '../../components/page-wrapper/PageWrapper';
 import CategoryMapper from '../../components/category-mapper/CategoryMapper';
 import NotebookMenuBar from '../../components/notebook-menubar/NotebookMenuBar'
-import Modal from '@material-ui/core/Modal';
 import CreateNotebook from '../../components/create-notebook/CreateNotebook-container';
 import CreateCategory from '../../components/create-notebook/create-category/CreateCategory';
+import UserOptions from '../../components/user-options/UserOptions';
 import WidthConstraint from '../../components/width-constraints/WidthConstraints';
 import { WHITEBOARD } from '../../utils/routes';
 
@@ -30,6 +31,8 @@ const propTypes = {
   })),
   isLoading: PropTypes.bool.isRequired,
   fetchNotebooksForUser: PropTypes.func.isRequired,
+  deleteUser: PropTypes.func.isRequired,
+  logoutUser: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
@@ -45,6 +48,7 @@ class Notebooks extends Component {
     this.state = {
       notebookCreationModalOpen: false,
       categoryCreationModalOpen: false,
+      userOptionsModalOpen: false,
       newCategories: [],
     };
 
@@ -69,19 +73,19 @@ class Notebooks extends Component {
 
   openModal(dialog) {
     this.setState({
-      [`${dialog}CreationModalOpen`]: true,
+      [`${dialog}ModalOpen`]: true,
     });
   }
 
   closeModal(dialog) {
     this.setState({
-      [`${dialog}CreationModalOpen`]: false,
+      [`${dialog}ModalOpen`]: false,
     });
   }
 
   render() {
-    const { notebookCreationModalOpen, categoryCreationModalOpen, newCategories } = this.state;
-    const { activeNotebookId, notebooks, isLoading } = this.props;
+    const { notebookCreationModalOpen, categoryCreationModalOpen, userOptionsModalOpen, newCategories } = this.state;
+    const { activeNotebookId, notebooks, isLoading, deleteUser, logoutUser} = this.props;
   
     const top = '50%';
     const left = '50%';
@@ -93,16 +97,23 @@ class Notebooks extends Component {
       transform: `translate(-${top}, -${left})`,
     };
 
-    const createNewCategory = () => this.openModal('category');
-    const createNewNotebook = () => this.openModal('notebook');
+    const createNewCategory = () => this.openModal('categoryCreation');
+    const createNewNotebook = () => this.openModal('notebookCreation');
+    const profileOptions = () => this.openModal('userOptions');
+
+    const onDeleteClick = () => {
+      deleteUser();
+      this.closeModal('userOptions');
+    };
 
     return(
       <Fragment>
         { !!(activeNotebookId) && <Redirect to={WHITEBOARD} /> }
         <NotebookMenuBar
           onCreateNewCategory={createNewCategory}
-          onCreateNewNotebook={createNewNotebook} 
-          />
+          onCreateNewNotebook={createNewNotebook}
+          onProfileClick={profileOptions}
+        />
         <div className={cx('page-wrapper-positioner')}>
           <PageWrapper isLoading={isLoading}>
             <CategoryMapper
@@ -111,14 +122,21 @@ class Notebooks extends Component {
               notebooks={notebooks}
               additionalCategories={newCategories}
             />
-            <Modal open={notebookCreationModalOpen} onClose={() => this.closeModal('notebook')}>
+            <Modal open={userOptionsModalOpen} onClose={() => this.closeModal('userOptions')}>
+              <div style={modalPosition}>
+                <WidthConstraint.ToolColorSelect>
+                  <UserOptions onDeleteClick={onDeleteClick} onLogOutClick={logoutUser}/>
+                </WidthConstraint.ToolColorSelect>
+              </div>
+            </Modal>
+            <Modal open={notebookCreationModalOpen} onClose={() => this.closeModal('notebookCreation')}>
               <div style={modalPosition}>
                 <WidthConstraint.NewEntity>
-                  <CreateNotebook onSubmit={() => this.closeModal('notebook')} categories={newCategories} />
+                  <CreateNotebook onSubmit={() => this.closeModal('notebookCreation')} categories={newCategories} />
                 </WidthConstraint.NewEntity>
               </div>
             </Modal>
-            <Modal open={categoryCreationModalOpen} onClose={() => this.closeModal('category')}>
+            <Modal open={categoryCreationModalOpen} onClose={() => this.closeModal('categoryCreation')}>
               <div style={modalPosition}>
                 <WidthConstraint.NewEntity>
                   <CreateCategory onSubmit={this.addNewCategory} />

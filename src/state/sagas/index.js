@@ -1,6 +1,7 @@
 import { fork } from 'redux-saga/effects';
 import { createNewUserWatcher } from './users/createNewUser';
 import { loginUserWatcher } from './users/loginUser';
+import { deleteUserWatcher } from './users/deleteUser';
 import { updateUserPropsWatcher } from './users/updateUserProps';
 import { createNewNotebookWatcher } from './notebooks/createNewNotebook';
 import { fetchNotebooksForUserWatcher } from './notebooks/fetchNotebooksForUser';
@@ -14,6 +15,7 @@ import { deleteNotebookWatcher } from './notebooks/deleteNotebook';
 export default function* rootSaga () {
   yield fork(createNewUserWatcher);
   yield fork(loginUserWatcher);
+  yield fork(deleteUserWatcher);
   // yield fork(updateUserPropsWatcher); // TODO: after I figure out how to `PUT` to `user.props`, the implementation on this can be finished
   yield fork(createNewNotebookWatcher);
   yield fork(fetchNotebooksForUserWatcher);

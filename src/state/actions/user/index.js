@@ -19,10 +19,24 @@ import {
   UPDATE_USER_PROPS_FAILURE,
 } from './updateUserProps';
 
+import {
+  deleteUser,
+  DELETE_USER,
+  DELETE_USER_SUCCESS,
+  DELETE_USER_FAILURE,
+} from './deleteUser';
+
+import {
+  logoutUser,
+  LOGOUT_USER,
+} from './logoutUser';
+
 export const userActions = {
   createNewUser,
   loginUser,
   updateUserProps,
+  deleteUser,
+  logoutUser,
 };
 
 export const userActionTypes = {
@@ -37,4 +51,10 @@ export const userActionTypes = {
   UPDATE_USER_PROPS,
   UPDATE_USER_PROPS_SUCCESS,
   UPDATE_USER_PROPS_FAILURE,
+  
+  DELETE_USER,
+  DELETE_USER_SUCCESS,
+  DELETE_USER_FAILURE,
+  
+  LOGOUT_USER,
 };
