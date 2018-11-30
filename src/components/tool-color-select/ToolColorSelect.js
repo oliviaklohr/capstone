@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
 import Modal from '@material-ui/core/Modal';
-import Button from '@material-ui/core/Button/Button';
 import classNames from 'classnames/bind';
 import ColorChooser from '../color-chooser/ColorChooser';
 import AddColorDialog from '../add-color-dialog/AddColorDialog';
