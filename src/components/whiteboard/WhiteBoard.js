@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton/IconButton';
 import Icon from '@mdi/react';
 import { mdiPlus } from '@mdi/js';
 import Modal from '@material-ui/core/Modal';
+import Penu from '../penu/Penu-container';
 import MenuBar from '../menubar/MenuBar';
 import Canvas from '../canvas/Canvas-container';
 import Paginator from '../paginator/Paginator';
@@ -215,6 +216,7 @@ class Whiteboard extends Component {
         />
         {whiteboardBody}
         {paginator}
+        <Penu />
       </Fragment>
     );
   }

@@ -31,13 +31,13 @@ const initialState = {
 const autoLoginInitialState = {
   isFetching: false,
   lastFetchStatus: 200,
-  userId: 5,
-  firstName: 'dylan',
-  lastName: 'klohr',
-  email: 'test1@gmail.com',
-  dateCreated: '2018-11-26T01:53:01.906Z',
+  userId: 15,
+  firstName: '234',
+  lastName: '234',
+  email: '23456',
+  dateCreated: '2018-11-29T04:18:50.549Z',
   isDeleted: false,
-  password: 'password',
+  password: '23456',
   props: {
     penColors: [
       'rgba(0, 0, 0, 1)',
@@ -83,7 +83,7 @@ const autoLoginInitialState = {
   }
 };
 
-const autoLogin = false;
+const autoLogin = true;
 
 export const user = (state = autoLogin ? autoLoginInitialState: initialState, action = {}) => {
   const { type, ...actionContents } = action;

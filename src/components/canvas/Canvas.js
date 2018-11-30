@@ -206,7 +206,6 @@ class Canvas extends Component {
           onTouchEnd={this.handleMouseUp}
           onMouseLeave={this.handleMouseUp}
         />
-        {/* <button onClick={() => saveDocument({ id: openDocument.id, dataURL: this.getCanvas().toDataURL()})}>Save Document</button> */}
       </Fragment>
     );
   }
