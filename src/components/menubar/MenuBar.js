@@ -9,31 +9,37 @@ const cx = classNames.bind(styles);
 
 const propTypes = {
   onBackClick: PropTypes.func,
-  onMenuClick: PropTypes.func,
+  // onMenuClick: PropTypes.func,
   onPenClick: PropTypes.func,
   onHighlighterClick: PropTypes.func,
   onEraserClick: PropTypes.func,
-  onSettingsClick: PropTypes.func,
+  onPlusClick: PropTypes.func,
+  onMinusClick: PropTypes.func,
+  // onSettingsClick: PropTypes.func,
   onGroupClick: PropTypes.func,
 };
 
 const defaultProps = {
   onBackClick: () => window.alert('you have clicked the BACK item!'),
-  onMenuClick: () => window.alert('you have clicked the MENU item!'),
+  // onMenuClick: () => window.alert('you have clicked the MENU item!'),
   onPenClick: () => window.alert('you have clicked the PEN item!'),
   onHighlighterClick: () => window.alert('you have clicked the HIGHLIGHTER item!'),
   onEraserClick: () => window.alert('you have clicked the ERASER item!'),
-  onSettingsClick: () => window.alert('you have clicked the SETTINGS item!'),
+  onPlusClick: () => window.alert('you have clicked the Plus item!'),
+  onMinusClick: () => window.alert('you have clicked the Minus item!'),
+  // onSettingsClick: () => window.alert('you have clicked the SETTINGS item!'),
   onGroupClick: () => window.alert('you have clicked the GROUP item!'),
 };
 
 const Menubar = ({
   onBackClick,
-  onMenuClick,
+  // onMenuClick,
   onPenClick,
   onHighlighterClick,
   onEraserClick,
-  onSettingsClick,
+  onMinusClick,
+  onPlusClick,
+  // onSettingsClick,
   onGroupClick,
 }) => {
   const leftSocketData = [
@@ -42,11 +48,11 @@ const Menubar = ({
       isDisabled: false,
       onClick: onBackClick,
     },
-    {
-      iconName: 'Menu',
-      isDisabled: false,
-      onClick: onMenuClick,
-    },
+    // {
+    //   iconName: 'Menu',
+    //   isDisabled: false,
+    //   onClick: onMenuClick,
+    // },
   ];
 
   const centerSocketData = [
@@ -68,10 +74,20 @@ const Menubar = ({
   ];
 
   const rightSocketData = [
+    // {
+      //   iconName: 'SettingsOutline',
+      //   isDisabled: false,
+      //   onClick: onSettingsClick,
+      // },
     {
-      iconName: 'SettingsOutline',
+      iconName: 'Plus',
       isDisabled: false,
-      onClick: onSettingsClick,
+      onClick: onPlusClick,
+    },
+    {
+      iconName: 'Minus',
+      isDisabled: false,
+      onClick: onMinusClick,
     },
     {
       iconName: 'AccountMultipleOutline',
