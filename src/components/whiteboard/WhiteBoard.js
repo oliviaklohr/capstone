@@ -206,9 +206,9 @@ class Whiteboard extends Component {
           </div>
         </Modal>
         <MenuBar
-          onSettingsClick={this.onPageDeleteClick}
+          onMinusClick={this.onPageDeleteClick}
           onBackClick={this.onBackClick}
-          onMenuClick={createNewPage}
+          onPlusClick={createNewPage}
           onPenClick={this.onPenClick}
           onEraserClick={this.onEraserClick}
           onHighlighterClick={this.onHighlighterClick}
