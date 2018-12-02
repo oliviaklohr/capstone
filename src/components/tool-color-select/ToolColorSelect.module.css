@@ -9,3 +9,8 @@
 .add-color-button {
   align-self: flex-end;
 }
+
+.slider-padding {
+  margin-top: 10px;
+  width: 90%;
+}

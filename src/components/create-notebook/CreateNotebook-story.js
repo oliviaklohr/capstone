@@ -1,13 +1,13 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import CreateNotebook from './CreateNotebook-container';
+import CreateNotebook from './CreateNotebook';
 
 storiesOf('CreateNotebook', module)
   .add('Basic CreateNotebook Example', () => {
 
     return(
-      <CreateNotebook />
+      <CreateNotebook categories={['foo', 'bar', 'baz']} onCreateNotebook={() => window.alert('notebook created!')} />
     );
   }
 );
