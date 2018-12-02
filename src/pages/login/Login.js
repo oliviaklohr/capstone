@@ -1,11 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames/bind';
 import { Redirect } from 'react-router';
 import SnackbarNotification from '../../components/snackbar-notification/SnackbarNotification';
 import LoginModule from '../../components/login-module/LoginModule-container';
 import PageWrapper, { Position } from '../../components/page-wrapper/PageWrapper';
 import WidthConstraints from '../../components/width-constraints/WidthConstraints';
 import { NOTEBOOKS } from '../../utils/routes';
+import styles from './Login.module.css';
+
+const cx = classNames.bind(styles);
+
 
 const LOGIN_STATUSES = {
   awaitingLogin: 'awaitingLogin',
@@ -35,6 +40,7 @@ const LoginPage = ({ loginStatus }) => {
       horizontalPosition={Position.center}
     >
       {notebooksRedirect}
+      <span className={cx('title')}>Remarque</span>
       <WidthConstraints.Login>
         <LoginModule />
       </WidthConstraints.Login>

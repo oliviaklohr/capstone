@@ -6,6 +6,10 @@
   align-items: center;
 }
 
+.no-decoration > a {
+  text-decoration: none;
+}
+
 .delete-margin {
   margin-top: 10px;
 }

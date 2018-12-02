@@ -115,9 +115,10 @@ class CreateNotebook extends Component {
     const switchMarkup = (<FormControlLabel label="Public" control={switchControl} />);
 
     return(
-      <Card>
+      <Card className={cx('card-padding-compensation')}>
         <div className={cx('create-notebook')}>
           <Input
+            className={cx('input-width-compensation')}
             name='Create Notebook'
             error={notebookNameError}
             onChange={this.handleNotebookNameChange}

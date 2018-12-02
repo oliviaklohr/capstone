@@ -23,13 +23,17 @@ const UserOptions = ({
 }) => (
   <Card>
     <div className={cx('user-options')}>
-      <Link to={LOGIN}>
-        <Button color='primary' onClick={onLogOutClick} value='Submit' variant="contained">Log Out User</Button>
-      </Link>
-      <div className={cx('delete-margin')}>
+      <span className={cx('no-decoration')}>
         <Link to={LOGIN}>
-          <Button color='secondary' onClick={onDeleteClick} value='Submit'>Delete User</Button>
+          <Button color='primary' onClick={onLogOutClick} value='Submit' variant="contained">Log Out User</Button>
         </Link>
+      </span>
+      <div className={cx('delete-margin')}>
+        <span className={cx('no-decoration')}>
+          <Link to={LOGIN}>
+            <Button color='secondary' onClick={onDeleteClick} value='Submit'>Delete User</Button>
+          </Link>
+        </span>
       </div>
     </div>
   </Card>

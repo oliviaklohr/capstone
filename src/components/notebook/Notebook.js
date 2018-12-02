@@ -56,7 +56,7 @@ const Notebook = ({
               <NotebookTitle label={title} />
               <NotebookMeta>
                 <NotebookMeta.Item isTime label="Date Created">{dateCreated}</NotebookMeta.Item>
-                <NotebookMeta.Item isTime label="Last Modified">{lastModified}</NotebookMeta.Item>
+                {/* <NotebookMeta.Item isTime label="Last Modified">{lastModified}</NotebookMeta.Item> */}
                 <NotebookMeta.Item>{visibilityMode}</NotebookMeta.Item>
               </NotebookMeta>
             </div>

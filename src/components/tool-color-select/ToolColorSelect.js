@@ -78,13 +78,15 @@ class ToolColorSelect extends Component {
           {/* <div className={cx('add-color-button')}>
             <Button color='primary' onClick={this.openModal} variant="contained" value='Submit'>Add Color</Button>
           </div> */}
-          <Slider
-            value={lineWidth}
-            onChange={(event, width) => onLineWidthChange({ width })}
-            min={2}
-            max={25}
-            step={1}
-          />
+          <div className={cx('slider-padding')}>
+            <Slider
+              value={lineWidth}
+              onChange={(event, width) => onLineWidthChange({ width })}
+              min={2}
+              max={25}
+              step={1}
+            />
+          </div>
         </div>
       </Card>
     );
