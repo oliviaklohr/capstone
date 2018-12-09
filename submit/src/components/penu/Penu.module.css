@@ -1,0 +1,10 @@
+.no-cursor {
+  cursor: auto;
+}
+
+
+.penu {
+  position: absolute;
+  left: 25px;
+  bottom: 20px;
+}

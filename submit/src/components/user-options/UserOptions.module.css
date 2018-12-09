@@ -1,0 +1,15 @@
+.user-options {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  padding: 20px;
+  align-items: center;
+}
+
+.no-decoration > a {
+  text-decoration: none;
+}
+
+.delete-margin {
+  margin-top: 10px;
+}

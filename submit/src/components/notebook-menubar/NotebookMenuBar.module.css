@@ -1,0 +1,6 @@
+.notebook-menu-bar {
+  background-color: #B2DFDB;
+  display: flex;
+  flex-direction: row;
+  width: 100%
+}

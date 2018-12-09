@@ -1,0 +1,20 @@
+export const transformDbNbToStoreNb = ({
+  notebookid,
+  ownerid,
+  title,
+  category,
+  isdeleted,
+  datecreated,
+  lastedited,
+  props,
+}) => ({
+  notebookId: notebookid,
+  ownerId: ownerid,
+  title: title,
+  category: category || 'Uncategorized',
+  isDeleted: isdeleted,
+  dateCreated: datecreated,
+  lastEdited: lastedited,
+  color: props.color,
+  isPublic: props.isPublic,
+});
