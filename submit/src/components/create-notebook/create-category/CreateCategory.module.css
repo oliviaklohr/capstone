@@ -1,0 +1,10 @@
+.category {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.category-button {
+  align-self: flex-end;
+  display: inline-block;
+}

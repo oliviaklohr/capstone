@@ -1,0 +1,26 @@
+.category-section {
+  color: #424242;
+}
+
+.category-section-grid {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.category-section-header {
+  font-family: 'Noto Sans', sans-serif;
+  border-bottom: 2px solid #424242;
+  margin-bottom: 15px;
+  padding: 0 30px;
+}
+
+.category-section-header > h1 {
+  font-weight: 400;
+  margin: 10px;
+}
+
+.category-section-wrapper {
+  margin-bottom: 15px;
+  padding: 0 60px;
+}

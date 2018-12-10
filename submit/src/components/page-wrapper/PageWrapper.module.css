@@ -1,0 +1,39 @@
+.page-wrapper {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 25px 30px;
+}
+
+.flush {
+  padding: 0;
+}
+
+.vertical-start {
+  justify-content: flex-start;
+}
+
+.vertical-center {
+  justify-content: center;
+}
+
+.vertical-end {
+  justify-content: flex-end;
+}
+
+.horizontal-start {
+  align-items: flex-start;
+}
+
+.horizontal-center {
+  align-items: center;
+}
+
+.horizontal-end {
+  align-items: flex-end;
+}

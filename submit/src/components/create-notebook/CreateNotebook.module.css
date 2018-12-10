@@ -1,0 +1,26 @@
+.create-notebook {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.input-width-compensation {
+  width: 100%;
+}
+
+.card-padding-compensation {
+  padding: 20px;
+}
+
+.create-notebook-button {
+  display: flex;
+  justify-content: space-between;
+}
+
+.create-notebook-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
